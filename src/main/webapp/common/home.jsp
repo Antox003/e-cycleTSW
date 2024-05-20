@@ -7,12 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
-	if(isAdmin == null){
-		response.sendRedirect(request.getContextPath()+ "/login.jsp");
-		return;
-	}
-	%>
+	
 	<h1>HOME</h1>
 	 
     

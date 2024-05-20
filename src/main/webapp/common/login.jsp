@@ -10,7 +10,7 @@
 <body>
 	
 	<section class="header-container>">
-     	<%@include file="header.jsp" %>
+     	<%@include file="header_guest.jsp" %>
     </section>
     
                <% 
@@ -22,9 +22,7 @@
 							}
 						}
 				%>
-				
-				
-	
+
     <section class="login-form">
         <div class="container">
             <h2>LOGIN</h2>

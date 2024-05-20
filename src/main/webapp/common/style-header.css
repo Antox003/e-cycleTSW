@@ -1,5 +1,4 @@
 @charset "ISO-8859-1";
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 *{
@@ -13,12 +12,17 @@ body{
 header{
   display: flex;
   justify-content: center;
-
 }
 
 img{
   max-width: 70%;
   margin-top: 6px;
+}
+
+.img-nav{
+  width: 30px;
+  height: 20px;
+  margin: 0 auto;
 }
 
 .cont-bar{
@@ -46,6 +50,7 @@ nav{
   font-weight: 600;
   color: #FFFFFF;
   transition: .2s ease-in;
+  cursor: pointer;
 }
 
 nav a {
@@ -63,7 +68,7 @@ nav a {
 nav a:hover {
   background: #BDECB6;
   border-radius: 10px;
-  height: 35px;
+  height: 46px;
   color: black;
   font-weight: 600;
   transition: .2s ease-in;

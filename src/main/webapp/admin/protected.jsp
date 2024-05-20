@@ -7,12 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
-	if((isAdmin == null) || (!isAdmin)){
-		response.sendRedirect(request.getContextPath()+ "/login.jsp");
-		return;
-	}
-	%>
+	
 	<h1>ADMIN</h1>
     
 	<a href="/e-cycle/Logout">Esci</a>
