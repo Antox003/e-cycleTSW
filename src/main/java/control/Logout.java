@@ -1,4 +1,4 @@
-package ecycle.common;
+package control;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -29,11 +29,11 @@ public class Logout extends HttpServlet {
 		// TODO Auto-generated method stub
 		Boolean isAdmin = (Boolean) request.getSession().getAttribute("isAdmin");
 		if(isAdmin == null) {
-			response.sendRedirect(request.getContextPath()+"/common/login.jsp");
+			response.sendRedirect(request.getContextPath()+"/login.jsp");
 			return;
 		}
 		request.getSession().invalidate();
-		response.sendRedirect(request.getContextPath()+"/common/login.jsp");
+		response.sendRedirect(request.getContextPath()+"/login.jsp");
 	}
 
 	/**
