@@ -9,14 +9,13 @@
 </head>
     <body>
     
-<%
-// Check user credentials
-Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
-if (isAdmin == null){	
-    response.sendRedirect(request.getContextPath() + "/login.jsp"); 
-    return;
-}
-%>
+    <section class="header-container>">
+     	<%@include file="header_guest.jsp" %>
+    </section>
+    
+    <section id="background">
+    <h1>Ciao</h1>
+    </section>
     
     <div id="riquadro">
         <br>
@@ -24,7 +23,7 @@ if (isAdmin == null){
             <div class="container_strumenti">
                 <input type="search" placeholder=" Cerca nel catalogo" id="search">
                 <button>
-                    <img src="search.svg" alt="" id="search">
+                    <img src="img/search.svg" alt="" id="search">
                 </button>
             </div>
         </section>
@@ -35,31 +34,31 @@ if (isAdmin == null){
             <div class="container_card">
     
                 <div class="card">
-                    <img class="immagine-prodotto" src="img-iphone12.jpg" alt="Iphone 12">
+                    <img class="immagine-prodotto" src="img/img-xiaomi14.jpeg">
                     <h3>Iphone 12</h3>
                     <p>Prestazioni top con chip A14, doppia fotocamera. Testato e garantito!</p>
-                    <h5>269  &#8364</h5>
+                    <h5>269 &#8364</h5>
                 </div>
         
                 <div class="card">
-                    <img class="immagine-prodotto" src="img-xiaomi14.jpeg" alt="Iphone 12">
+                    <img class="immagine-prodotto" src="img/img-xiaomi14.jpeg" alt="Iphone 12">
                     <h3>Xiaomi 14</h3>
                     <p>Chip potente, display OLED e camera avanzata. Testato e garantito!</p>
-                    <h5>455€</h5>
+                    <h5>455 &#8364</h5>
                 </div>
         
                 <div class="card">
-                    <img class="immagine-prodotto" src="img-mate50-pro.png" alt="Iphone 12">
+                    <img class="immagine-prodotto" src="img/img-xiaomi14.jpeg" alt="Iphone 12">
                     <h3>Huawei mate 50</h3>
                     <p>Potente ed elegante. Esplora l'ultima tecnologia con il display OLED</p>
-                    <h5>420€</h5>
+                    <h5>420 &#8364</h5>
                 </div>
         
                 <div class="card">
-                    <img class="immagine-prodotto" src="iphone-14-1662617481.png" alt="Iphone 12">
+                    <img class="immagine-prodotto" src="img/img-xiaomi14.jpeg" alt="Iphone 12">
                     <h3>Iphone 13</h3>
                     <p>Prestazioni top con chip A15, doppia fotocamera. Testato e garantito!</p>
-                    <h5>389€</h5>
+                    <h5>389 &#8364</h5>
                 </div>
     
             </div>
@@ -72,31 +71,31 @@ if (isAdmin == null){
                 <div class="container_card">
     
                     <div class="card">
-                        <img class="immagine-prodotto" src="l-61by-v5suhl._ac_sl1500_-1679919472.png" alt="Iphone 12">
+                        <img class="immagine-prodotto" src="img/img-xiaomi14.jpeg" alt="Iphone 12">
                         <h3>Samsung book 3</h3>
                         <p>Design elegante, prestazioni potenti. Esplora il futuro dell'informatica!</p>
-                        <h5>400€</h5>
+                        <h5>400 &#8364</h5>
                     </div>
             
                     <div class="card">
-                        <img class="immagine-prodotto" src="refurb-iphone-12-purple-2021 1.png" alt="Iphone 12">
+                        <img class="immagine-prodotto" src="img/img-xiaomi14.jpeg" alt="Iphone 12">
                         <h3>Iphone 12</h3>
                         <p>IPhone di Francesco perchè è straricco e possiede tutti gli aifon</p>
-                        <h5>400€</h5>
+                        <h5>400 &#8364</h5>
                     </div>
             
                     <div class="card">
-                        <img class="immagine-prodotto" src="refurb-iphone-12-purple-2021 1.png" alt="Iphone 12">
+                        <img class="immagine-prodotto" src="img/img-xiaomi14.jpeg" alt="Iphone 12">
                         <h3>Iphone 12</h3>
                         <p>IPhone di Francesco perchè è straricco e possiede tutti gli aifon</p>
-                        <h5>400€</h5>
+                        <h5>400 &#8364</h5>
                     </div>
             
                     <div class="card">
-                        <img class="immagine-prodotto" src="refurb-iphone-12-purple-2021 1.png" alt="Iphone 12">
+                        <img class="immagine-prodotto" src="img/img-xiaomi14.jpeg" alt="Iphone 12">
                         <h3>Iphone 12</h3>
                         <p>IPhone di Francesco perchè è straricco e possiede tutti gli aifon</p>
-                        <h5>400€</h5>
+                        <h5>400 &#8364</h5>
                     </div>
         
                 </div>
@@ -104,7 +103,7 @@ if (isAdmin == null){
             
     </div>
     
-    	<a href="/e-cycle/Logout">Esci</a>
+    <!-- 	<a href="/e-cycle/Logout">Esci</a>  -->
         
     </body>
 

@@ -14,7 +14,7 @@
                 <a href="#home"><img src="img/logo.png"></a>
             </div>
                 <nav>
-                    <a href="#home"><img src="img/home.svg" class="img-nav">Home</a>
+                    <a href="home.jsp"><img src="img/home.svg" class="img-nav">Home</a>
                     <a href="#carrello"><img src="img/cart.svg" class="img-nav">Carrello</a>
                 </nav>
             </div>
