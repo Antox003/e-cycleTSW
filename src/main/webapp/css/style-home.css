@@ -8,10 +8,11 @@
     font-family: "Poppins", sans-serif;
 }
 
-#background{
+#prova{
 	background: url('img/background_home.png');
-	height:20vh;
-	color:red;
+	height:100vh;
+	position:relative;
+	z-index:100;
 }
 
 #riquadro{
@@ -38,6 +39,7 @@ body{
 .container_strumenti{
     width: 50%;
     display: flex;
+    justify-content:space-between;
     background: #E4E4E4;
     border-radius: 50px;
 }
@@ -47,7 +49,7 @@ body{
     border-radius: 10px;
     border: none;
     width: 600px;
-    height: 40px;
+    height: 3.0em;
     margin-left: 2%;
     margin-top: 2px;
 }
@@ -59,15 +61,12 @@ body{
 button{
     background: #aad059;
     border: none;
-    border-radius: 1000px;
+    border-radius: 50px;
     margin: 5px 8px 5px;
-    width: 37px;
-    height: 37px;
-}
-
-button img{
-    padding-top: 7px;
-    padding-left: 3px;
+    min-width: 37px;
+    min-height: 37px;
+    max-width: 37px;
+    max-height: 37px;
 }
 
 .container_card{
