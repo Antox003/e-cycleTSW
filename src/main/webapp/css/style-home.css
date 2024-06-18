@@ -9,10 +9,10 @@
 }
 
 #prova{
-	background: url('img/background_home.png');
-	height:100vh;
-	position:relative;
-	z-index:100;
+	background-image: url('../img/background_home.png');
+	height:50vh;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
 #riquadro{
@@ -22,7 +22,8 @@
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.30);
-    margin: 20% 1% 0 5%;
+    margin: 0 1% 0 5%;
+    position: absolute;
 }
 
 body{
@@ -129,3 +130,4 @@ h2{
 hr{
     margin: 0 5% 0 5%;
 }
+

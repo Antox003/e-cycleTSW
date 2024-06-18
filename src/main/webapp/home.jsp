@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="css/style-home.css">
 </head>
     <body>
-    
+
     <section class="header-container>">
      	<%@include file="header_guest.jsp" %>
     </section>
     
    <section id="prova">
    
-   
+
    </section>
     
     <div id="riquadro">
@@ -103,7 +103,7 @@
             </section>
             
     </div>
-        
+     
     </body>
 
 </html>
