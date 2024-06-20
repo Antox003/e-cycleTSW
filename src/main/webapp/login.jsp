@@ -10,7 +10,7 @@
 <body>
 	
 	<section class="header-container>">
-     	<%@include file="header_guest.jsp" %>
+     	<%@include file="navbar_unlogged.html" %>
     </section>
     
                <% 

@@ -1,12 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>500 Errore del Server</title>
+    <link rel="stylesheet" href="css/style-error500.css">
 </head>
 <body>
-<h1>ERRORE 500</h1>
+    <div class="container">
+        <div class="content">
+            <img src="img/warning.png" alt="Illustrazione di errore">
+            <div class="text">
+                <h1>500</h1>
+                <p>Errore del Server</p>
+                <p>Ci scusiamo per l'inconveniente, stiamo lavorando per risolvere il problema.</p>
+                <a href="home.jsp" class="button">Torna alla Home</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
