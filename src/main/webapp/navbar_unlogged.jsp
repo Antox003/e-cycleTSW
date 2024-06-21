@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +16,7 @@
                 <nav>
                     <a href="home.jsp"><img src="img/img-casa.svg" class="img-nav">Home</a>
                     <a href="carrello.jsp"><img src="img/img-carrello.svg" class="img-nav">Carrello</a>
-                    <button class="btn" action="login.jsp">Login</button>
+                    <button class="btn">Login</button>
                 </nav>
             </div>
         </header>
