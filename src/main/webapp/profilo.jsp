@@ -5,7 +5,8 @@
     <head>
         <link rel="stylesheet" href="css/style-profilo.css">
         <meta charset="UTF-8">
-        <title>e-Cycle</title>
+        <title>E-Cycle | Profilo</title>
+        <link rel="shortcut icon" href="img/logo_circle.png">
     </head>
     <body>
     <section class="header-container>">
