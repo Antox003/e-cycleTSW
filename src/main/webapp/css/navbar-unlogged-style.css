@@ -45,11 +45,10 @@ nav{
   background-color: #AAD059;
   border: none;
   height: 35px;
-  width: 150px;
+  width: 100px;
   border-radius: 10px;
   font-weight: 600;
   color: #FFFFFF;
-  transition: .2s ease-in;
   cursor: pointer;
 }
 
@@ -66,7 +65,6 @@ nav a {
 }
 
 nav a:hover {
-  background: #BDECB6;
   border-radius: 10px;
   height: 46px;
   color: black;
@@ -77,6 +75,4 @@ nav a:hover {
 .btn:hover{
   border-radius: 10px;
   height: 35px;
-  transform: scale(1.08);
-  transition: .2s ease-in;
 }
