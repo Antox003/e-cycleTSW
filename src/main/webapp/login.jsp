@@ -14,35 +14,54 @@
      	<%@include file="navbar_unlogged.jsp" %>
     </section>
     
-               <% 
-					List<String> errors = (List<String>) request.getAttribute("errors");
-						if (errors != null){
-							for (String error: errors){ %>
-								<%=error %> <br>		
-								<%
-							}
-						}
-				%>
 
     <section class="login-form">
         <div class="container">
             <h2>LOGIN</h2>
-            <form action="/e-cycle/Login" method="post">
+            <form action="Login" method="post">
                 <label for="email">Username</label>
                 <br>
                 <input type="text" name="username" id="username" placeholder=" Inserisci il tuo username">
                 <br>
+                <% 
+                    List<String> errors = (List<String>) request.getAttribute("errors");
+                    if (errors != null){
+                        for (String error: errors){ 
+                            if (error.contains("username")) { %>
+                                <span style="color: red;"><%= error %></span><br>
+                            <% }
+                        }
+                    }
+                %>
                 <br>
                 <label for="password">Password</label>
                 <br>
                 <input type="password" name="password"  id="password" placeholder=" Inserisci la tua password">
                 <br>
+                <% 
+                    if (errors != null){
+                        for (String error: errors){ 
+                            if (error.contains("password")) { %>
+                                <span style="color: red;"><%= error %></span><br>
+                            <% }
+                        }
+                    }
+                %>
                 <br>
                 <div class="button-container">
                     <input type="submit" id="button" value="Accedi">
                     <p><a href="">Non hai un account?Registrati</a></p>
                 </div>
                 <br>
+                <% 
+                    if (errors != null){
+                        for (String error: errors){ 
+                            if (!error.contains("username") && !error.contains("password")) { %>
+                                <span style="color: red;"><%= error %></span><br>
+                            <% }
+                        }
+                    }
+                %>
             </form>
         </div>
     </section>

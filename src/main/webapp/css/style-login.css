@@ -64,3 +64,11 @@ body{
 .container form p a{
     color: #000000;
 }
+
+@media only screen and (max-width:800px) {
+	
+	.login-form .container{
+    	width: 70%;
+	}
+
+}

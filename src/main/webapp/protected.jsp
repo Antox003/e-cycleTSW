@@ -19,6 +19,6 @@
 	
 	<h1>ADMIN</h1>
     
-	<a href="/e-cycle/Logout">Esci</a>
+	<a href="Logout">Esci</a>
 </body>
 </html>
