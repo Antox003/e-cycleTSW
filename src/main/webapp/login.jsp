@@ -19,9 +19,9 @@
         <div class="container">
             <h2>LOGIN</h2>
             <form action="Login" method="post">
-                <label for="email">Username</label>
+                <label for="email">email</label>
                 <br>
-                <input type="text" name="username" id="username" placeholder=" Inserisci il tuo username">
+                <input type="email" name="email" id="email" placeholder=" Inserisci il tuo email">
                 <br>
                 <% 
                     List<String> errors = (List<String>) request.getAttribute("errors");
@@ -50,7 +50,7 @@
                 <br>
                 <div class="button-container">
                     <input type="submit" id="button" value="Accedi">
-                    <p><a href="">Non hai un account?Registrati</a></p>
+                    <p><a href="registration.jsp">Non hai un account?Registrati</a></p>
                 </div>
                 <br>
                 <% 
