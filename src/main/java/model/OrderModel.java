@@ -14,7 +14,7 @@ public class OrderModel {
 
 			Connection con = null;
 			CartBean cart = carr;
-			User user = userr;
+			UserBean user = userr;
 			carrello = cart.getCarrello();
 			
 			String sql = "INSERT INTO Ordine (codiceProdotto, emailCliente, prezzoTotale, quantity, dataAcquisto) VALUES (?, ?, ?, ?, current_date())";
@@ -302,4 +302,3 @@ public class OrderModel {
 		}
 	}
 }
-

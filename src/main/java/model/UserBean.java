@@ -2,10 +2,10 @@ package model;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+public class UserBean implements Serializable {
 	private static final long serialVersionUID = 2856723757650934254L;
 	
-	public User() {
+	public UserBean() {
 		email="";
 		nome="";
 		cognome="";
@@ -99,5 +99,3 @@ public class User implements Serializable {
 	private String cvv;
 	private String role;
 }
-
-

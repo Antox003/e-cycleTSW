@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import control.DriverManagerConnectionPool;
+import model.DriverManagerConnectionPool;
 import model.OrderModel;
 import model.User;
 
@@ -59,7 +59,7 @@ public class Login extends HttpServlet {
     					String psw = checkPsw(password);
     					if (psw.compareTo(rs.getString(2)) == 0) {
     						control = true;
-    						User registeredUser = new User();
+    						UserModel registeredUser = new UserModel();
     						registeredUser.setEmail(rs.getString(1));
     						registeredUser.setNome(rs.getString(4));
     						registeredUser.setCognome(rs.getString(5));
