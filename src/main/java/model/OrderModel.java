@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 public class OrderModel {
-	public synchronized CartBean doOrder(CartBean carr, UserBean userr) {
+	public synchronized CartBean doOrder(CartBean carr, UserBean userr) throws SQLException {
 		Collection<ProductBean> carrello = null;
 
 			Connection con = null;
@@ -184,7 +184,7 @@ public class OrderModel {
 		return lista;
 	}
 	
-	public synchronized Collection<OrderBean> addRecensione(int codiceProdotto, String email, int votazione, String text, Collection<OrderBean> ordini) {
+	public synchronized Collection<OrderBean> addRecensione(int codiceProdotto, String email, int votazione, String text, Collection<OrderBean> ordini) throws SQLException {
 		String sql = "INSERT INTO Recensione (codiceProdotto, emailCliente, votazione, testo, dataRecensione) VALUES (?, ?, ?, ?, current_date())";
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -224,47 +224,8 @@ public class OrderModel {
 		}
 	}
 	
-	public synchronized Collection<OrderBean> addSingleRecensione(String email, RecensioneBean bean, Collection<OrderBean> ordini) {
-		String sql = "UPDATE Recensione SET votazione = ?, testo = ? WHERE codiceProdotto = ? AND emailCliente = ?";
-		Connection con = null;
-		PreparedStatement ps = null;
-		
-		try {
-			con = DriverManagerConnectionPool.getConnection();
-			ps = con.prepareStatement(sql);
-			ps.setInt(1, bean.getVoto());
-			ps.setString(2, bean.getTesto());
-			ps.setInt(3, bean.getCodiceProdotto());
-			ps.setString(4, email);
-			
-			ps.executeUpdate();
-			con.commit();
-			
-			
-			if (ordini != null && ordini.size() != 0) {
-				Iterator<?> it = ordini.iterator();
-				while (it.hasNext()) {
-					OrderBean ord = (OrderBean) it.next();
-					ProductBean prod = ord.getProdotto();
-					
-					if (prod.getCodice() == bean.getCodiceProdotto()) {
-						prod.setVotazione(bean.getVoto());
-					}
-				}
-			}
-			return ordini;
-		}
-		catch (Exception e) {
-			return ordini;
-		}
-		finally {
-			if (con != null) {
-				DriverManagerConnectionPool.releaseConnection(con);
-			}
-		}
-	}
 	
-	public synchronized Collection<OrderBean> eliminaSingleRecensione(String email, int codice, Collection<OrderBean> ordini) {
+	public synchronized Collection<OrderBean> eliminaSingleRecensione(String email, int codice, Collection<OrderBean> ordini) throws SQLException {
 		String sql = "DELETE FROM Recensione WHERE codiceProdotto = ? AND emailCliente = ?";
 		Connection con = null;
 		PreparedStatement ps = null;
