@@ -11,10 +11,7 @@ public class UserBean implements Serializable {
 		cognome="";
 		indirizzo="";
 		telefono="";
-		numero="";
-		intestatario="";
-		cvv="";
-		role="";
+
 	}
 	
 	public void setEmail(String newEmail) {
@@ -57,30 +54,6 @@ public class UserBean implements Serializable {
 		return telefono;
 	}
 	
-	public void setNumero(String newNumero) {
-		numero = newNumero;
-	}
-	
-	public String getNumero() {
-		return numero;
-	}
-	
-	public void setIntestatario(String newIntestatario) {
-		intestatario = newIntestatario;
-	}
-	
-	public String getIntestatario() {
-		return intestatario;
-	}
-	
-	public void setCvv(String newCvv) {
-		cvv = newCvv;
-	}
-	
-	public String getCvv() {
-		return cvv;
-	}
-	
 	public void setRole(String newRole) {
 		role = newRole;
 	}
@@ -94,8 +67,5 @@ public class UserBean implements Serializable {
 	private String cognome;
 	private String indirizzo;
 	private String telefono;
-	private String numero;
-	private String intestatario;
-	private String cvv;
 	private String role;
 }

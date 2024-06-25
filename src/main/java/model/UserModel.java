@@ -40,9 +40,6 @@ public class UserModel {
 		String cognome = bean.getCognome();
 		String indirizzo = bean.getIndirizzo();
 		String telefono = bean.getTelefono();
-		String carta = bean.getNumero();
-		String intestatario = bean.getIntestatario();
-		String cvv = bean.getCvv();
 		bean.setRole("registeredUser");
 		try {
 			Connection con = DriverManagerConnectionPool.getConnection();
@@ -56,9 +53,6 @@ public class UserModel {
 			ps.setString(3, cognome);
 			ps.setString(4, indirizzo);
 			ps.setString(5, telefono);
-			ps.setString(6, carta);
-			ps.setString(7, intestatario);
-			ps.setString(8, cvv);
 			ps.setString(9, oldEmail);
 			
 			ps.executeUpdate();

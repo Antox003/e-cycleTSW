@@ -50,7 +50,7 @@ public class Registrazione extends HttpServlet {
 		String carta = request.getParameter("carta");
 		String intestatario = request.getParameter("intestatario");
 		String cvv = request.getParameter("cvv");
-		String redirectedPage = "/loginPage.jsp";
+		String redirectedPage = "/login.jsp";
 		try {
 			Connection con = DriverManagerConnectionPool.getConnection();
 			String sql = "INSERT INTO UserAccount(email, passwordUser, nome, cognome, indirizzo, telefono, numero, intestatario, CVV) VALUES (?, MD5(?), ?, ?, ?, ?, ?, ?, ?)";
@@ -88,8 +88,13 @@ public class Registrazione extends HttpServlet {
 			DriverManagerConnectionPool.releaseConnection(con);
 		}
 		catch (SQLException e) {
-			request.getSession().setAttribute("register-error", true);
-			redirectedPage = "/register-form.jsp";
+			e.printStackTrace(); // Log dell'eccezione per debug
+		    
+		    // Imposta un messaggio di errore specifico nella sessione
+		    request.getSession().setAttribute("register-error", "Errore durante la registrazione. Si prega di riprovare più tardi.");
+		    
+		    // Mantieni il reindirizzamento alla pagina di registrazione
+		    redirectedPage = "/registration.jsp";			
 		}
 		response.sendRedirect(request.getContextPath() + redirectedPage);
 	}
