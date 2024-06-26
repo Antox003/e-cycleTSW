@@ -19,9 +19,9 @@
         <div class="container">
             <h2>LOGIN</h2>
             <form action="Login" method="post">
-                <label for="email">Username</label>
+                <label for="email">Email</label>
                 <br>
-                <input type="text" name="username" id="username" placeholder=" Inserisci il tuo username">
+                <input type="email" name="email" id="email" placeholder=" Inserisci il tuo username">
                 <br>
                 <% 
                     List<String> errors = (List<String>) request.getAttribute("errors");

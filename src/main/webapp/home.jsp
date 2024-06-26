@@ -138,13 +138,12 @@
                 <br>
                 <br>
             </section>
-            
         </div>
             <br>
             <br>
             <br>
             <br>
-            
+            <a href="Logout">Esci</a>
     <section class="footer-container>">
      	<%@include file="footer.jsp" %>
     </section>
