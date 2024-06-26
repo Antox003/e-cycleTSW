@@ -1,4 +1,4 @@
-<%@ page language="java" import= java.util.List contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java"  import="java.util.List" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,12 +9,13 @@
     <link rel="shortcut icon" href="img/logo_circle.png">
 </head>
 <body>
-    
-    <section class="header-container">
-        <%@include file="navbar_unlogged.jsp" %>
+	
+	<section class="header-container>">
+     	<%@include file="navbar_unlogged.jsp" %>
     </section>
+    
 
-     <section class="login-form">
+    <section class="login-form">
         <div class="container">
             <h2>LOGIN</h2>
             <form action="Login" method="post">
@@ -49,7 +50,7 @@
                 <br>
                 <div class="button-container">
                     <input type="submit" id="button" value="Accedi">
-                    <p><a href="">Non hai un account? Registrati</a></p>
+                    <p><a href="">Non hai un account?Registrati</a></p>
                 </div>
                 <br>
                 <% 
@@ -66,8 +67,9 @@
     </section>
     <br>
     <section class="footer-container">
-        <%@include file="footer.jsp" %>
+     	<%@include file="footer.jsp" %>
     </section>
+    
 
 </body>
 </html>

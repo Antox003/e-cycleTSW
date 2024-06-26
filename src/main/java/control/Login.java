@@ -49,10 +49,10 @@ public class Login extends HttpServlet {
     			
     			if(username.equals("admin") && password.equals("mypass")){ //admin
     				request.getSession().setAttribute("isAdmin", Boolean.TRUE); //inserisco il token nella sessione
-    				response.sendRedirect("admin/protected.jsp");
+    				response.sendRedirect("protected.jsp");
     			} else if (username.equals("user") && password.equals("mypass")){ //user
     				request.getSession().setAttribute("isAdmin", Boolean.FALSE); //inserisco il token nella sessione
-    				response.sendRedirect("common/protected.jsp");
+    				response.sendRedirect("home.jsp");
     			} else {
     				errors.add("Username o password non validi!");
     				request.setAttribute("errors", errors);
