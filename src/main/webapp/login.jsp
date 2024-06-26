@@ -49,7 +49,7 @@
                 <br>
                 <div class="button-container">
                     <input type="submit" id="button" value="Accedi">
-                    <p><a href="">Non hai un account?Registrati</a></p>
+                    <p><a href="">Non hai un account? Registrati</a></p>
                 </div>
                 <br>
                 <% 
