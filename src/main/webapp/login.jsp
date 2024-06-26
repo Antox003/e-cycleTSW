@@ -27,7 +27,7 @@
                     List<String> errors = (List<String>) request.getAttribute("errors");
                     if (errors != null){
                         for (String error: errors){ 
-                            if (error.contains("username")) { %>
+                            if (error.contains("email")) { %>
                                 <span style="color: red;"><%= error %></span><br>
                             <% }
                         }
@@ -56,7 +56,7 @@
                 <% 
                     if (errors != null){
                         for (String error: errors){ 
-                            if (!error.contains("username") && !error.contains("password")) { %>
+                            if (!error.contains("email") && !error.contains("password")) { %>
                                 <span style="color: red;"><%= error %></span><br>
                             <% }
                         }
