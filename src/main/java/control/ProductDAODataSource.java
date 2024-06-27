@@ -37,15 +37,15 @@ public class ProductDAODataSource implements IBeanDAO<ProductBean> {
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO " + ProductDAODataSource.TABLE_NAME
-				+ " (NAME, DESCRIPTION, PRICE, QUANTITY) VALUES (?, ?, ?, ?)";
+				+ " (ID_PRODOTTO, Nome, Descrizione, Prezzo) VALUES (?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
-			preparedStatement.setString(1, product.getName());
-			preparedStatement.setString(2, product.getDescription());
-			preparedStatement.setInt(3, product.getPrice());
-			preparedStatement.setInt(4, product.getQuantity());
+			preparedStatement.setInt(1, product.getCode());
+			preparedStatement.setString(2, product.getNome());
+			preparedStatement.setString(3, product.getDescrizione());
+			preparedStatement.setDouble(4, product.getPrezzo());
 
 			preparedStatement.executeUpdate();
 
@@ -95,7 +95,7 @@ public class ProductDAODataSource implements IBeanDAO<ProductBean> {
 
 		Collection<ProductBean> products = new LinkedList<ProductBean>();
 
-		String selectSQL = "SELECT * FROM " + ProductDAODataSource.TABLE_NAME;
+		String selectSQL = "SELECT Nome, Descrizione, Prezzo FROM PRODOTTO " + ProductDAODataSource.TABLE_NAME;
 
 		if (order != null && !order.equals("")) {
 			selectSQL += " ORDER BY " + order;
@@ -110,11 +110,9 @@ public class ProductDAODataSource implements IBeanDAO<ProductBean> {
 			while (rs.next()) {
 				ProductBean bean = new ProductBean();
 
-				bean.setCode(rs.getInt("CODE"));
-				bean.setName(rs.getString("NAME"));
-				bean.setDescription(rs.getString("DESCRIPTION"));
-				bean.setPrice(rs.getInt("PRICE"));
-				bean.setQuantity(rs.getInt("QUANTITY"));
+				bean.setNome(rs.getString("Nome"));
+				bean.setDescrizione(rs.getString("Descrizione"));
+				bean.setPrezzo(rs.getInt("Prezzo"));
 				products.add(bean);
 			}
 
@@ -142,11 +140,9 @@ public class ProductDAODataSource implements IBeanDAO<ProductBean> {
 			preparedStatement.setInt(1, code);
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
-				bean.setCode(rs.getInt("CODE"));
-				bean.setName(rs.getString("NAME"));
-				bean.setDescription(rs.getString("DESCRIPTION"));
-				bean.setPrice(rs.getInt("PRICE"));
-				bean.setQuantity(rs.getInt("QUANTITY"));
+				bean.setNome(rs.getString("Nome"));
+				bean.setDescrizione(rs.getString("Descrizione"));
+				bean.setPrezzo(rs.getInt("Prezzo"));
 			}
 		} finally {
 			try {

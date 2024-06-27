@@ -50,7 +50,7 @@
                 <br>
                 <div class="button-container">
                     <input type="submit" id="button" value="Accedi">
-                    <p><a href="">Non hai un account?Registrati</a></p>
+                    <p>Non hai un account? <a href="registrazione.jsp">Registrati</a></p>
                 </div>
                 <br>
                 <% 

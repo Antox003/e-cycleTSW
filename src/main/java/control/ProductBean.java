@@ -1,68 +1,40 @@
 package control;
 
-import java.io.Serializable;
+public class ProductBean {
+	private int Code;
+    private String Nome;
+    private String Descrizione;
+    private double Prezzo;
 
-public class ProductBean implements Serializable {
+    public int getCode() {
+        return Code;
+    }
 
-	private static final long serialVersionUID = 1L;
+    public void setCode(int Code) {
+        this.Code = Code;
+    }
+    
+    public String getNome() {
+        return Nome;
+    }
 
-	private int code;
-	private String name;
-	private String description;
-	private int price;
-	private int quantity;
+    public void setNome(String Nome) {
+        this.Nome = Nome;
+    }
 
-	public ProductBean() {
-		code = -1;
-		name = "";
-		description = "";
-		quantity = 0;
-	}
+    public String getDescrizione() {
+        return Descrizione;
+    }
 
-	public int getCode() {
-		return code;
-	}
+    public void setDescrizione(String Descrizione) {
+        this.Descrizione = Descrizione;
+    }
 
-	public void setCode(int code) {
-		this.code = code;
-	}
+    public double getPrezzo() {
+        return Prezzo;
+    }
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-	@Override
-	public String toString() {
-		return name + " (" + code + "), " + price + " " + quantity + ". " + description;
-	}
-
+    public void setPrezzo(double Prezzo) {
+        this.Prezzo = Prezzo;
+    }
 }
-
