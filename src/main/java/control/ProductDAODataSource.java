@@ -21,14 +21,14 @@ public class ProductDAODataSource implements IBeanDAO<ProductBean> {
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
 
-			ds = (DataSource) envCtx.lookup("jdbc/ecycle");
+			ds = (DataSource) envCtx.lookup("jdbc/storage");
 
 		} catch (NamingException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
 	}
 
-	private static final String TABLE_NAME = "prodotto";
+	private static final String TABLE_NAME = "product";
 
 	@Override
 	public synchronized void doSave(ProductBean product) throws SQLException {
@@ -36,16 +36,14 @@ public class ProductDAODataSource implements IBeanDAO<ProductBean> {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		String insertSQL = "INSERT INTO " + ProductDAODataSource.TABLE_NAME
-				+ " (ID_PRODOTTO, Nome, Descrizione, Prezzo) VALUES (?, ?, ?, ?)";
+		String insertSQL = "INSERT INTO " + ProductDAODataSource.TABLE_NAME + " (Nome, Descrizione, Prezzo) VALUES (?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
-			preparedStatement.setInt(1, product.getCode());
-			preparedStatement.setString(2, product.getNome());
-			preparedStatement.setString(3, product.getDescrizione());
-			preparedStatement.setDouble(4, product.getPrezzo());
+			preparedStatement.setString(1, product.getNome());
+			preparedStatement.setString(2, product.getDescrizione());
+			preparedStatement.setDouble(3, product.getPrezzo());
 
 			preparedStatement.executeUpdate();
 
@@ -95,7 +93,7 @@ public class ProductDAODataSource implements IBeanDAO<ProductBean> {
 
 		Collection<ProductBean> products = new LinkedList<ProductBean>();
 
-		String selectSQL = "SELECT Nome, Descrizione, Prezzo FROM PRODOTTO " + ProductDAODataSource.TABLE_NAME;
+		String selectSQL = "SELECT * FROM " + ProductDAODataSource.TABLE_NAME;
 
 		if (order != null && !order.equals("")) {
 			selectSQL += " ORDER BY " + order;
@@ -110,6 +108,7 @@ public class ProductDAODataSource implements IBeanDAO<ProductBean> {
 			while (rs.next()) {
 				ProductBean bean = new ProductBean();
 
+				bean.setCode(rs.getInt("CODE"));
 				bean.setNome(rs.getString("Nome"));
 				bean.setDescrizione(rs.getString("Descrizione"));
 				bean.setPrezzo(rs.getInt("Prezzo"));
@@ -140,9 +139,10 @@ public class ProductDAODataSource implements IBeanDAO<ProductBean> {
 			preparedStatement.setInt(1, code);
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
+				bean.setCode(rs.getInt("Code"));
 				bean.setNome(rs.getString("Nome"));
 				bean.setDescrizione(rs.getString("Descrizione"));
-				bean.setPrezzo(rs.getInt("Prezzo"));
+				bean.setPrezzo(rs.getDouble("Prezzo"));
 			}
 		} finally {
 			try {
@@ -156,5 +156,4 @@ public class ProductDAODataSource implements IBeanDAO<ProductBean> {
 		return bean;
 	}
 }
-
 
