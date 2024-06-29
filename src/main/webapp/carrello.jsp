@@ -83,7 +83,7 @@
         <br>
         <br>
         <section class="footer-container>">
-     	<%@include file="footer.jsp" %>
+     	<%@include file="fragment/footer.jsp" %>
     </section>
     </body>
 </html>

@@ -10,7 +10,7 @@
 </head>
 <body>
 <section class="header-container>">
-     	<%@include file="navbar_unlogged.jsp" %>
+     	<%@include file="fragment/header.jsp" %>
     </section>
 
     <div class="container">
@@ -37,11 +37,11 @@
             <br>
             <input type="submit" value="Registrati">
             <br>
-            <p class="login">Hai già un account? <a href="login.jsp">Accedi</a></p>
+            <p class="login">Hai giï¿½ un account? <a href="login.jsp">Accedi</a></p>
         </form>
     </div>
     <section class="footer-container">
-     	<%@include file="footer.jsp" %>
+     	<%@include file="fragment/footer.jsp" %>
     </section>
     
     

@@ -12,7 +12,7 @@
 <body>
 
     <section class="header-container">
-        <%@include file="navbar_unlogged.jsp" %>
+        <%@include file="fragment/header.jsp" %>
    </section>
 
     <section id="check">
@@ -30,7 +30,7 @@
     </section>
 
     <section class="footer-container">
-        <%@include file="footer.jsp" %>
+        <%@include file="fragment/footer.jsp" %>
    </section>
 
 </body>

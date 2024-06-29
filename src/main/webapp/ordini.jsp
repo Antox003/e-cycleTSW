@@ -10,7 +10,7 @@
     </head>
     <body>
     <section class="header-container>">
-     	<%@include file="navbar_unlogged.jsp" %>
+     	<%@include file="fragment/header.jsp" %>
     </section>
     
         <div class="container-ordini">
