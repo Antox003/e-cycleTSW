@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="control.UserBean" %>
+    pageEncoding="ISO-8859-1" import="model.UserBean" %>
 <!DOCTYPE html>
 <html>
 <head>
