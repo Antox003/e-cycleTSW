@@ -34,17 +34,16 @@
             <h2>Di tendenza ></h2>
 
             <div class="container_card">
-                   <%-- Ciclo su productList per mostrare i prodotti --%>
                 <% List<ProductBean> productList = (List<ProductBean>) request.getAttribute("productList"); %>
                 <% if (productList != null) { %>
                     <% for (ProductBean product : productList) { %>
                         <div class="card">
-                            <img class="immagine-prodotto" src="img/img-xiaomi14.jpeg" alt="Iphone 12">
+                            <img class="immagine-prodotto" src="img/img-xiaomi14.jpeg" alt="Immagine prodotto">
                             <h3><%= product.getNome() %></h3>
-                            <p>Prestazioni top con chip A14, doppia fotocamera. Testato e garantito!</p>
+                            <p><%= product.getDescrizione() %></p>
                             <br>
                             <div class="bottone-prodotto">
-                                <button class="visualizza-prodotto"><a href="prodotto.jsp">Visualizza prodotto</a></button>
+                                <button class="visualizza-prodotto"><a href="prodotto.jsp">Vedi dettagli</a></button>
                                 <h5><%= product.getPrezzo() %>&#8364;</h5>
                             </div>
                         </div>
@@ -54,6 +53,24 @@
                 <% } %>
             </div>
         </section>
+        
+        <h2>Visualizza tutti ></h2>
+            <section id="visualizza_tutti">
+                <div class="container_card">
+    
+                    <div class="card">
+                        <img class="immagine-prodotto" src="img/img-xiaomi14.jpeg" alt="Iphone 12">
+                        <h3>Samsung book 3</h3>
+                        <p>Design elegante, prestazioni potenti. Esplora il futuro dell'informatica!</p>
+                        <br>
+                        <div class="bottone-prodotto">
+                            <button class="visualizza-prodotto">Visualizza prodotto</button>
+                            <h5>400&#8364</h5>
+                        </div>
+                    </div>
+        
+                </div>
+            </section>
     </div>
 </body>
 </html>
