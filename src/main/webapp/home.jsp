@@ -31,7 +31,7 @@
         </section>
 
         <section id="tendenza">
-            <h2>Di tendenza ></h2>
+            <h2>I nostri prodotti ></h2>
 
             <div class="container_card">
                 <% List<ProductBean> productList = (List<ProductBean>) request.getAttribute("productList"); %>
@@ -43,8 +43,8 @@
                             <p><%= product.getDescrizione() %></p>
                             <br>
                             <div class="bottone-prodotto">
-                                <button class="visualizza-prodotto"><a href="prodotto.jsp">Vedi dettagli</a></button>
-                                <h5><%= product.getPrezzo() %>&#8364;</h5>
+                                <button class="visualizza-prodotto"><a href="prodotto.jsp">Vedi prodotto</a></button>
+                                <h5><%= product.getPrezzo() %> &#8364;</h5>
                             </div>
                         </div>
                     <% } %>
@@ -53,24 +53,11 @@
                 <% } %>
             </div>
         </section>
-        
-        <h2>Visualizza tutti ></h2>
-            <section id="visualizza_tutti">
-                <div class="container_card">
-    
-                    <div class="card">
-                        <img class="immagine-prodotto" src="img/img-xiaomi14.jpeg" alt="Iphone 12">
-                        <h3>Samsung book 3</h3>
-                        <p>Design elegante, prestazioni potenti. Esplora il futuro dell'informatica!</p>
-                        <br>
-                        <div class="bottone-prodotto">
-                            <button class="visualizza-prodotto">Visualizza prodotto</button>
-                            <h5>400&#8364</h5>
-                        </div>
-                    </div>
-        
-                </div>
-            </section>
     </div>
+    
+     <section class="footer-container>">
+     	<%@include file="fragment/footer.jsp" %>
+    </section>
+    
 </body>
 </html>

@@ -131,10 +131,14 @@ nav {
   height: 35px;
   width: 90px;
   border-radius: 10px;
-  font-weight: 600;
-  color: #FFFFFF;
   transition: .2s ease-in;
   cursor: pointer;
+}
+
+.btn a{
+  font-weight: 600;
+  color: #FFFFFF;
+  text-decoration:none;
 }
 
 .btn:hover {

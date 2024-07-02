@@ -10,7 +10,7 @@
 	<%
 		Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
 	if ((isAdmin == null) || (!isAdmin)){
-		response.sendRedirect(request.getContextPath()+ "/login.jsp");
+		response.sendRedirect(request.getContextPath()+ "/ProductListServlet");
 		return;
 	}
 	%>
