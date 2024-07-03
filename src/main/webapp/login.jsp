@@ -17,8 +17,8 @@
 
     <section class="login-form">
         <div class="container">
-            <h2>LOGIN</h2>
             <form action="Login" method="post">
+            <h2>LOGIN</h2>
                 <label for="email">Email</label>
                 <br>
                 <input type="email" name="email" id="email" placeholder=" Inserisci il tuo username">

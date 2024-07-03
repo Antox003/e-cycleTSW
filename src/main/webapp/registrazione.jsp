@@ -36,8 +36,8 @@
             <p id="error-message" style="color: red;"></p>
             <br>
             <input type="submit" value="Registrati">
-            <br>
-            <p class="login">Hai gi� un account? <a href="login.jsp">Accedi</a></p>
+            
+            <p class="login">Hai gi&aacute; un account?<a href="login.jsp">Accedi</a></p>
         </form>
     </div>
     <section class="footer-container">

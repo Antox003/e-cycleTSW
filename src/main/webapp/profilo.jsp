@@ -14,12 +14,13 @@
     </section>
     
         <div class="container-profilo">
-            <header>
-                <h3 class="titolo">Il mio Profilo <img src="img/img-utente.svg" class="img-h3"></h3>
-                <h5 class="logout">Esci <img src="img/img-logout.svg" class="img-h5"></h5>
-            </header>
-            <!-- Informazioni Personali -->
-            <h1 class="titolo-info"><img src="img/img-utente2.svg" class="img-riepilogo"> Informazioni Personali</h1>    
+        <br>
+            <div class="profilo">
+                <h3 class="titolo"><img src="img/img-utente.svg" class="img-h3"> Il mio Profilo</h3>
+            </div>
+            
+             <br>
+            <h1 class="titolo-info"><img src="img/img-utente.svg" class="img-riepilogo"> Informazioni Personali</h1>    
             <div class="riepilogo">
                 <table class="tabella-utente">
                     <tr>
@@ -59,8 +60,8 @@
             </div>
             <br>
             <hr>
-
-            <!-- Indirizzo di spedizione -->
+            <br>
+            
             <h1 class="titolo-info"><img src="img/img-casa.svg" class="img-riepilogo"> Indirizzo di spedizione</h1>
             <div class="riepilogo">
                 <table class="tabella-utente">
@@ -102,7 +103,7 @@
             <br>
             <hr>
 
-                <!-- Metodo di pagamento  -->
+            <br>
             <h1 class="titolo-info"><img src="img/img-carta.svg" class="img-riepilogo"> Metodo di pagamento</h1>
             <div class="riepilogo">
                 <table class="tabella-utente">
@@ -135,5 +136,9 @@
             </div>
             <br>          
         </div>
+        
+        <section class="footer-container>">
+     	<%@include file="fragment/footer.jsp" %>
+    </section>
     </body>
 </html>
