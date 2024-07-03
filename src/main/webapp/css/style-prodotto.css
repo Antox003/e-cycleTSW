@@ -41,13 +41,6 @@ body{
     border-radius: 20px;
 }
 
-.container-img .small img{
-    max-width: 18%;
-    background-color: #A1C3A8;
-    border-radius: 20px;
-    margin: 10px;
-}
-
 .descrizione{
     width: 50%;
     text-align: center;
@@ -149,14 +142,22 @@ body{
     padding-bottom: 20px;
 }
 
-.white{
-    background-color: #ffffff;
+.grays{
+    background-color: #f5f5f5;
     display: flex;
     justify-content: space-evenly;
     padding-top: 20px;
     padding-bottom: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
+}
+
+.white{
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .paragrafo{

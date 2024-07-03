@@ -38,7 +38,7 @@
                 <% if (productList != null) { %>
                     <% for (ProductBean product : productList) { %>
                         <div class="card">
-                            <img class="immagine-prodotto" src="img/img-xiaomi14.jpeg" alt="Immagine prodotto">
+                            <img class="immagine-prodotto" src="img/<%= product.getNome() %>.png" alt="Immagine prodotto">
                             <h3><%= product.getNome() %></h3>
                             <p><%= product.getDescrizione() %></p>
                             <br>

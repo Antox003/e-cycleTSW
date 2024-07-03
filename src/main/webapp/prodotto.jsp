@@ -24,14 +24,7 @@
             <% if (product != null) { %>
                 <div class="container-img">
                     <div class="big">
-                        <img src="img/iphone12(BIG).png" alt="">
-                    </div>
-                    <div class="small">
-                        <img src="img/iphone12(BIG).png" alt="">
-                        <img src="img/iphone12(BIG).png" alt="">
-                        <img src="img/iphone12(BIG).png" alt="">
-                        <img src="img/iphone12(BIG).png" alt="">
-
+                        <img src="img/<%=product.getNome() %>.png" alt="">
                     </div>
                 </div>
                 
@@ -73,7 +66,7 @@
                     <br>
                     <h4>Pagamenti sicuri</h4>
                     <br>
-                    <p>Utilizziamo solamente i più affidabili servizi di pagamento</p>
+                    <p>Utilizziamo solamente i pi&uacute; affidabili servizi di pagamento</p>
                 </div>
                 <br>
                 <div class="info">
@@ -189,7 +182,7 @@
                         <p class="paragrafo"><%= product.getSO() %></p>
                     </div>
                 </div>
-                <div class="gray" >
+                <div class="grays" >
                     <div class="specifiche">
                         <h4>Resistenza all'acqua</h4>
                     </div>
