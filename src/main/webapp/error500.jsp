@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Errore del Server</title>
     <link rel="stylesheet" href="css/style-error500.css">
-    <link rel="shortcut icon" href="img/logo_circle.png">
+    <link rel="icon" href="img/logo_circle.png" type="image/png">
 </head>
 <body>
     <div class="container">

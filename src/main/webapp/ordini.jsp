@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="css/style-ordini.css">
         <meta charset="UTF-8">
         <title>E-Cycle | Ordini</title>
-        <link rel="shortcut icon" href="img/logo_circle.png">
+        <link rel="icon" href="img/logo_circle.png" type="image/png">
     </head>
     <body>
     <section class="header-container>">

@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="css/style-carrello.css">
         <meta charset="UTF-8">
         <title>E-Cycle | Carrello</title>
+        <link rel="icon" href="img/logo_circle.png" type="image/png">
     </head>
     <body>
     

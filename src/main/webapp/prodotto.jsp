@@ -24,7 +24,7 @@
             <% if (product != null) { %>
                 <div class="container-img">
                     <div class="big">
-                        <img src="img/<%=product.getNome() %>.png" alt="">
+                        <img src="img/<%=product.getNome()%>.png" alt="">
                     </div>
                 </div>
                 

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrazione</title>
     <link rel="stylesheet" href="css/style-registrazione.css">
+    <link rel="icon" href="img/logo_circle.png" type="image/png">
 </head>
 <body>
 <section class="header-container>">
