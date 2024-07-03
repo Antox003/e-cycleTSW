@@ -38,14 +38,17 @@
 
                     <div class="container-button">
                         <button class="buy">
-                            <a href="#acquista">Acquista</a>
+                            <a href="check.jsp">Acquista</a>
                         </button>
-    
+    					 <%if (session.getAttribute("registeredUser") == null) { %>
+                       
+                        <% } else {%>
                         <button class="cart">
-                            <a href="cart">
+                            <a href="carrello.jsp">
                                 <img src="img/cart-add.svg" alt="">Aggiungi al carrello
                             </a>
                         </button>
+                        <%} %>
                     </div>
                 </div>
             </div>
