@@ -1,23 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="model.ProductBean" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prodotto</title>
+    <title>Dettagli Prodotto</title>
     <link rel="stylesheet" href="css/style-prodotto.css">
     <link rel="icon" href="img/logo_circle.png" type="image/png">
 </head>
 <body>
 
-<section class="header-container>">
-     	<%@include file="fragment/header.jsp" %>
-    </section>
+<section class="header-container">
+    <jsp:include page="fragment/header.jsp" />
+</section>
 
-    <section id="riquadro">
-        <div class="container-max">
-            <div class="container-prodotto">
+<section id="riquadro">
+    <div class="container-max">
+        <div class="container-prodotto">
+            <%-- Verifica se l'oggetto product è presente nell'attributo della richiesta --%>
+		<% ProductBean product = (ProductBean) request.getAttribute("product"); %>
+            <% if (product != null) { %>
                 <div class="container-img">
                     <div class="big">
                         <img src="img/iphone12(BIG).png" alt="">
@@ -30,16 +34,14 @@
 
                     </div>
                 </div>
-                <div class="descrizione">
-                    <h5>Apple</h5>
-                    <h1>Iphone12</h1>
+                
+                 <div class="descrizione">
+                    <h5><%= product.getCasa() %></h5>
+                    <h1><%= product.getNome() %></h1>
                     <p>
-                        Acquista l'iPhone 12 rigenerato e risparmia senza compromettere la qualità.
-                        Con display Super Retina XDR, chip A14 Bionic e doppia fotocamera da 12 MP, offre prestazioni eccellenti
-                        a un prezzo accessibile Ogni unità è accuratamente testata e garantita per funzionare come nuova.
-                        Scegli sostenibilità e valore con l'iPhone 12 rigenerato!
+                        <%= product.getDescrizione() %>
                     </p>            
-                    <h3>300&#8364</h3>
+                    <h3><%= product.getPrezzo() %>&#8364</h3>
 
                     <div class="container-button">
                         <button class="buy">
@@ -96,7 +98,7 @@
                         <h4>Display</h4>
                     </div>
                     <div class="specifiche">
-                        <p>Display OLED Super Retina da 6.1” con HDR e True Tone</p>
+                        <p><%= product.getDisplay() %></p>
                     </div>
                 </div>
                 <div class="white" >
@@ -104,7 +106,7 @@
                         <h4>Fotocamera</h4>
                     </div>
                     <div class="specifiche">
-                        <p class="paragrafo">Doppia fotocamera da 12 MP con stabilizzazione ottica dell'immagine, modalità ritratto e illuminazione, video 4K a 1080p</p>
+                        <p class="paragrafo"><%= product.getFotocamera() %></p>
                     </div>
                 </div>
                 <div class="gray">
@@ -112,110 +114,133 @@
                         <h4>Spazio archiviazione</h4>
                     </div>
                     <div class="specifiche">
-                        <p class="paragrafo">128gb</p>
+                        <p class="paragrafo"><%= product.getArchiviazione() %></p>
                     </div>
                 </div>
-                <div class="white" >
-                    <div class="specifiche">
-                        <h4>Fotocamera</h4>
-                    </div>
-                    <div class="specifiche">
-                        <p class="paragrafo">Doppia fotocamera da 12 MP con stabilizzazione ottica dell'immagine, modalità ritratto e illuminazione, video 4K a 1080p</p>
-                    </div>
-                </div>
-                <div class="gray">
+                <div class="white">
                     <div class="specifiche">
                         <h4>Autenticazione sicura</h4>
                     </div>
                     <div class="specifiche">
-                        <p class="paragrafo">Proteggi la tua privacy con il riconoscimento facciale</p>
+                        <p class="paragrafo"><%= product.getAutenticazione() %></p>
                     </div>   
                 </div>
-                <div class="white" >
+                <div class="gray" >
                     <div class="specifiche">
                         <h4>Chip</h4>
                     </div>
                     <div class="specifiche">
-                        <p class="paragrafo">Chip A14 Bionic, estremamente potente e intelligente</p>
+                        <p class="paragrafo"><%= product.getChip() %></p>
                     </div>
                 </div>
-                <div class="gray">
+                <div class="white">
                     <div class="specifiche">
                         <h4>Scheda SIM</h4>
                     </div>
                     <div class="specifiche">
-                        <p class="paragrafo">Chip A14 Bionic, estremamente potente e intelligente</p>
+                        <p class="paragrafo"><%= product.getSIM() %></p>
                     </div>
                 </div>
-                <div class="white" >
+                <div class="gray" >
                     <div class="specifiche">
                         <h4>Bluetooth</h4>
                     </div>
                     <div class="specifiche">
-                        <p class="paragrafo">5.0</p>
+                        <p class="paragrafo"><%= product.getBluetooth() %></p>
                     </div>
                 </div>
-                <div class="gray">
+                <div class="white">
                     <div class="specifiche">
                         <h4>Connettori</h4>
                     </div>
                     <div class="specifiche">
-                        <p class="paragrafo">Connettore Lightning</p>
+                        <p class="paragrafo"><%= product.getConnettori() %></p>
                     </div>
                 </div>
-                <div class="white" >
+                <div class="gray" >
                     <div class="specifiche">
                         <h4>Rete</h4>
                     </div>
                     <div class="specifiche">
-                        <p class="paragrafo">5G / LTE, Wi-Fi</p>
+                        <p class="paragrafo"><%= product.getRete() %>i</p>
                     </div>
                 </div>
-                <div class="gray">
+                <div class="white">
                     <div class="specifiche">
                         <h4>Batteria</h4>
                     </div>
                     <div class="specifiche">
-                        <p class="paragrafo">Li-ion 2815 mAh, ricarica senza fili, compatibile con caricabatterie Qi</p>
+                        <p class="paragrafo"><%= product.getBatteria() %></p>
                     </div> 
                 </div>
-                <div class="white" >
+                <div class="gray" >
                     <div class="specifiche">
                         <h4>Dimensioni e peso</h4>
                     </div>
                     <div class="specifiche">
-                        <p class="paragrafo">146.7 x 71.5 x 7.4 mm / 164 g</p>
+                        <p class="paragrafo"><%= product.getDimPes() %></p>
                     </div>
                 </div>
-                <div class="gray">
+                <div class="white">
                     <div class="specifiche">
                         <h4>Sistema operativo</h4>
                     </div>
                     <div class="specifiche">
-                        <p class="paragrafo">Goditi iOS 17, il miglior sistema operativo mai sviluppato da Apple</p>
+                        <p class="paragrafo"><%= product.getSO() %></p>
                     </div>
                 </div>
-                <div class="white" >
+                <div class="gray" >
                     <div class="specifiche">
                         <h4>Resistenza all'acqua</h4>
                     </div>
                     <div class="specifiche">
-                        <p class="paragrafo">A causa del processo di ricondizionamento non possiamo garantire che la certificazione IP68 rimanga valida.</p>
+                        <p class="paragrafo"><%= product.getAcqua() %></p>
                     </div>
-                </div>
-
-            </section>
-
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            <% } else { %>
+                <p>Prodotto non trovato.</p>
+            <% } %>
         </div>
-    </section>
-    <br>
-    <br>
-    <br>
-    <br>
+    </div>
+</section>
 
-<section class="footer-container>">
-     	<%@include file="fragment/footer.jsp" %>
-    </section>
+<section class="footer-container">
+    <jsp:include page="fragment/footer.jsp" />
+</section>
 
 </body>
 </html>

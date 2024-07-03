@@ -34,7 +34,7 @@ public class Login extends HttpServlet {
         
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String redirectedPage = "/ProductListServlet";
+        String redirectedPage = "/ProductList";
         List<String> errors = new ArrayList<>();
         RequestDispatcher dispatcherToLoginPage = request.getRequestDispatcher("login.jsp");
         Boolean control = false;
@@ -84,7 +84,7 @@ public class Login extends HttpServlet {
                             request.getSession().setAttribute("isAdmin", Boolean.FALSE);
                         }
                         
-                        redirectedPage = "/ProductListServlet";
+                        redirectedPage = "/ProductList";
                         DriverManagerConnectionPool.releaseConnection(con);
                         break;
                     }

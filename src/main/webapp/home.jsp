@@ -16,7 +16,7 @@
     </section>
 
     <section id="prova">
-        <%-- Qui puoi inserire eventuali altre sezioni --%>
+    
     </section>
 
     <div id="riquadro">
@@ -43,7 +43,7 @@
                             <p><%= product.getDescrizione() %></p>
                             <br>
                             <div class="bottone-prodotto">
-                                <button class="visualizza-prodotto"><a href="prodotto.jsp">Vedi prodotto</a></button>
+                                <button class="visualizza-prodotto"><a href="ProductDetail?ID_PRODOTTO=<%= product.getCode() %>">Vedi prodotto</a></button>
                                 <h5><%= product.getPrezzo() %> &#8364;</h5>
                             </div>
                         </div>

@@ -1,6 +1,7 @@
 package control;
 
 import java.io.IOException;
+
 import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -15,15 +16,15 @@ import model.ProductDAODataSource;
 /**
  * Servlet implementation class ProductListServlet
  */
-@WebServlet("/ProductListServlet")
-public class ProductListServlet extends HttpServlet {
+@WebServlet("/ProductList")
+public class ProductList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProductDAODataSource productDAO = new ProductDAODataSource();
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductListServlet() {
+    public ProductList() {
         super();
         // TODO Auto-generated constructor stub
     }

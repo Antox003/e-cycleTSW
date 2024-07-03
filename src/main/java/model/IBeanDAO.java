@@ -11,5 +11,5 @@ public interface IBeanDAO<T> {
 
 	public T doRetrieveByKey(int code) throws SQLException;
 	
-	public List<T> doRetrieveAll(String order) throws SQLException; // Utilizza List<T> invece di Collection<T>
+	public List<T> doRetrieveAll(String order) throws SQLException;
 }

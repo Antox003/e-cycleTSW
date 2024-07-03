@@ -17,7 +17,7 @@
                 <h1>404</h1>
                 <p>Pagina non trovata</p>
                 <p>Sembra che il server abbia riciclato questa pagina.</p>
-                <a href="ProductListServlet" class="button">Torna alla Home</a>
+                <a href="ProductList" class="button">Torna alla Home</a>
             </div>
         </div>
     </div>
