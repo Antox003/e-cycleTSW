@@ -10,6 +10,9 @@ import javax.servlet.http.HttpSession;
 import model.SpedizioneBean;
 import model.SpedizioneDAODataSource;
 
+import model.PagamentoBean;
+import model.PagamentoDAODataSource;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -17,6 +20,7 @@ import java.sql.SQLException;
 public class RetriveSpedizioni extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private SpedizioneDAODataSource spedizioneDAO = new SpedizioneDAODataSource();
+    private PagamentoDAODataSource pagamentoDAO = new PagamentoDAODataSource();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false); // Non crea una nuova sessione se non esiste
@@ -31,6 +35,9 @@ public class RetriveSpedizioni extends HttpServlet {
         try {
             SpedizioneBean spedizione = spedizioneDAO.doRetrieveByKey(idAccount);
             request.setAttribute("spedizione", spedizione);
+            
+            PagamentoBean pagamento = pagamentoDAO.doRetrieveByKey(idAccount);
+            request.setAttribute("pagamento", pagamento);
         } catch (SQLException e) {
             throw new ServletException("Cannot retrieve spedizione from database", e);
         }

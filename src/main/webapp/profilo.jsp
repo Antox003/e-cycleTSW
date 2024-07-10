@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="model.UserBean, java.util.List, model.SpedizioneBean, model.SpedizioneDAODataSource"%>
+    pageEncoding="ISO-8859-1" import="model.UserBean, java.util.List, model.SpedizioneBean, model.SpedizioneDAODataSource, model.PagamentoDAODataSource, model.PagamentoBean"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -55,7 +55,7 @@
                     </tr>
                     <tr>
                         <th>Stato Account</th>
-                        <td>Attivo<%= String.valueOf(user.getCode()) %></td>
+                        <td>Attivo</td>
                     </tr>
                 </table>
                 <a class="modifica"><img src="img/img-matita.svg" class="img-cont"><b><u>Modifica Informazioni</u></b></a> 
@@ -115,39 +115,45 @@
             <h1 class="titolo-info"><img src="img/img-carta.svg" class="img-riepilogo"> Metodo di pagamento</h1>
             <div class="riepilogo">
                 <table class="tabella-utente">
+              <%   PagamentoBean pagamento = (PagamentoBean) request.getAttribute("pagamento");
+       				 if (pagamento != null) {
+       				 %>
                     <tr>
                         <th>Nome del Titolare</th>
-                        <td>Mario Rossi</td>
+                        <td><%= user.getNome() %> <%= user.getCognome() %></td>
                     </tr>
                     <tr>
                         <th>Tipo di Carta</th>
-                        <td>Visa</td>
+                        <td><%=pagamento.getTipocarta() %></td>
                     </tr>
                     <tr>
                         <th>Numero di Carta</th>
-                        <td>**** **** **** 1234</td>
+                        <td><%=pagamento.getNumerocarta() %></td>
                     </tr>
                     <tr>
                         <th>Data di Scadenza</th>
-                        <td>12/2025</td>
+                        <td><%=pagamento.getDatascadenza() %></td>
                     </tr>
                     <tr>
                         <th>Indirizzo di Fatturazione</th>
-                        <td>Via Roma 1, Milano, 20100</td>
+                        <td><%= spedizione.getIndirizzo() %> <%= spedizione.getCivico() %>, <%= spedizione.getCitta() %> <%= spedizione.getCap() %></td>
                     </tr>
                     <tr>
                         <th>Metodo di Pagamento Preferito</th>
                         <td>Sì</td>
                     </tr>
                 </table> 
+                  <% } else { %>
+        <p>Nessun dato di pagamento trovato.</p>
+        <% } %>
                 <a class="modifica"><img src="img/img-matita.svg" class="img-cont"><b><u>Modifica Pagamento</u></b></a>
             </div>
             <br>          
         </div>
         
-        </section>
+   </section>
         
-        <section class="footer-container>">
+      <section class="footer-container>">
      	<%@include file="fragment/footer.jsp" %>
     </section>
     
