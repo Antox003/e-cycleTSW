@@ -10,6 +10,10 @@
 </head>
 <body>
 
+<section class="header-container>">
+     	<%@include file="fragment/header.jsp" %>
+</section>
+
 	<%
 		Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
 	if ((isAdmin == null) || (!isAdmin)){
@@ -43,13 +47,13 @@
                     </div>
                 </nav>
             </div>
-                                <%   UserBean user = (UserBean) session.getAttribute("registeredUser"); %>
+                                <%   UserBean utente = (UserBean) session.getAttribute("registeredUser"); %>
 
 
             <div class="main">
                 <div id="dashboard" class="container-sezione">
                     <!-- Contenuto della sezione Dashboard -->
-                    <p class="p_titolo"><b class="titolo_p"><em>Benvenuto <%=user.getNome() %> <%=user.getCognome() %>!</em></b><br>Qui puoi visualizzare una panoramica del sito.
+                    <p class="p_titolo"><b class="titolo_p"><em>Benvenuto <%=utente.getNome() %> <%=utente.getCognome() %>!</em></b><br>Qui puoi visualizzare una panoramica del sito.
                         <br>Esplora la barra di <b>navigazione laterale</b> per più funzioni!
                     </p>
                     <p class="p"> 
@@ -190,20 +194,20 @@
 
                 <div id="catalogo" class="container-sezione" style="display: none;">
                     <!-- Contenuto della sezione Catalogo -->
-                    <p class="p"><b class="b"><img src="./File Immagini/img-freccia.svg" class="img-p">Catalogo</b><br> Qui puoi visualizzare il catalogo del sito.<br>Puoi <b>aggiungere</b>, <b>eliminare</b> o <b>modificare</b> articoli o effettuare una <b>ricerca</b> per <b>parametri</b>.<br></p>
+                    <p class="p"><b class="b"><img src="img/img-freccia.svg" class="img-p">Catalogo</b><br> Qui puoi visualizzare il catalogo del sito.<br>Puoi <b>aggiungere</b>, <b>eliminare</b> o <b>modificare</b> articoli o effettuare una <b>ricerca</b> per <b>parametri</b>.<br></p>
                     <div class="container-riquadri">
                         <div class="riquadro riquadro2">
                             <div class="dettagli" onclick="togglePopup('popup3')">
                                 <h2 class="dett-3">Aggiungi articolo</h2>
                             </div>
-                            <img src="./File Immagini/img-aggiunta.svg" alt="articoli">
+                            <img src="img/img-aggiunta.svg" alt="articoli">
                         </div>
                         <div id="popup3" class="sfondo-popup"> 
                             <div class="container-popup"> 
                                 <h2 class="h2-popup">Aggiungi un articolo al Catalogo</h2><br> 
                                 <form class="container-form"> 
                                     <div class="selezione">
-                                        <button class="button-chiudi-popup" type="reset" onclick="togglePopup('popup3')"><img src="./File Immagini/img-freccia_indietro.svg" class="img-button">Annulla</button> 
+                                        <button class="button-chiudi-popup" type="reset" onclick="togglePopup('popup3')"><img src="img/img-freccia_indietro.svg" class="img-button">Annulla</button> 
                                     </div>
                                     <br>
                                     <label class="form-label" for="nome">Nome (max 50 caratteri):</label> 
@@ -240,7 +244,7 @@
                                     <label class="form-label" for="acqua">Resistenza all'acqua:</label> 
                                     <input class="form-input" type="text" placeholder="Inserisci resistenza all'acqua" maxlength="300" id="acqua" name="acqua" required> 
                                     <div class="selezione">
-                                        <button class="button-chiudi-popup" type="reset" onclick="togglePopup('popup3')"><img src="./File Immagini/img-freccia_indietro.svg" class="img-button">Annulla</button> 
+                                        <button class="button-chiudi-popup" type="reset" onclick="togglePopup('popup3')"><img src="img/img-freccia_indietro.svg" class="img-button">Annulla</button> 
                                         <button class="button-submit" type="submit">Aggiungi</button> 
                                     </div>
                                 </form>  
@@ -256,9 +260,9 @@
                             <tr><th>ID Prodotto</th><th>Nome</th><th>Elimina</th><th>Modifica</th><th>Specifiche e Pagina Prodotto</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>1</td><td>Pc</td><td><img src="./File Immagini/img-elimina.svg" class="img-tab"></td><td><img src="./File Immagini/img-matita.svg" class="img-tab" onclick="togglePopup('popup6')"></td><td><img src="./File Immagini/img-dett_prodotto.svg" class="img-tab"></td></tr>
-                            <tr><td>2</td><td>Smartphone</td><td><img src="./File Immagini/img-elimina.svg" class="img-tab"></td><td><img src="./File Immagini/img-matita.svg" class="img-tab" onclick="togglePopup('popup6')"></td><td><img src="./File Immagini/img-dett_prodotto.svg" class="img-tab"></td></tr>
-                            <tr><td>3</td><td>Tablet</td><td><img src="./File Immagini/img-elimina.svg" class="img-tab"></td><td><img src="./File Immagini/img-matita.svg" class="img-tab" onclick="togglePopup('popup6')"></td><td><img src="./File Immagini/img-dett_prodotto.svg" class="img-tab"></td></tr>
+                            <tr><td>1</td><td>Pc</td><td><img src="img/img-elimina.svg" class="img-tab"></td><td><img src="img/img-matita.svg" class="img-tab" onclick="togglePopup('popup6')"></td><td><img src="img/img-dett_prodotto.svg" class="img-tab"></td></tr>
+                            <tr><td>2</td><td>Smartphone</td><td><img src="img/img-elimina.svg" class="img-tab"></td><td><img src="img/img-matita.svg" class="img-tab" onclick="togglePopup('popup6')"></td><td><img src="img/img-dett_prodotto.svg" class="img-tab"></td></tr>
+                            <tr><td>3</td><td>Tablet</td><td><img src="img/img-elimina.svg" class="img-tab"></td><td><img src="img/img-matita.svg" class="img-tab" onclick="togglePopup('popup6')"></td><td><img src="img/img-dett_prodotto.svg" class="img-tab"></td></tr>
                         </tbody>
                     </table>
                     <div id="popup6" class="sfondo-popup"> 
@@ -266,7 +270,7 @@
                             <h2 class="h2-popup">Modifica un articolo del Catalogo</h2><br> 
                             <form class="container-form"> 
                                 <div class="selezione">
-                                    <button class="button-chiudi-popup" type="reset" onclick="togglePopup('popup6')"><img src="./File Immagini/img-freccia_indietro.svg" class="img-button">Annulla</button> 
+                                    <button class="button-chiudi-popup" type="reset" onclick="togglePopup('popup6')"><img src="img/img-freccia_indietro.svg" class="img-button">Annulla</button> 
                                 </div>
                                 <br>
                                 <label class="form-label" for="nome">Nome (max 50 caratteri):</label> 
@@ -303,7 +307,7 @@
                                 <label class="form-label" for="acqua">Resistenza all'acqua:</label> 
                                 <input class="form-input" type="text" placeholder="Inserisci resistenza all'acqua" maxlength="300" id="acqua" name="acqua"> 
                                 <div class="selezione">
-                                    <button class="button-chiudi-popup" type="reset" onclick="togglePopup('popup6')"><img src="./File Immagini/img-freccia_indietro.svg" class="img-button">Annulla</button> 
+                                    <button class="button-chiudi-popup" type="reset" onclick="togglePopup('popup6')"><img src="img/img-freccia_indietro.svg" class="img-button">Annulla</button> 
                                     <button class="button-submit" type="submit">Modifica</button> 
                                 </div>
                             </form>  
@@ -315,7 +319,7 @@
                 <div id="ordini" class="container-sezione" style="display: none;">
                     <!-- Contenuto della sezione Ordini -->
                     <p class="p">
-                        <b class="b"><img src="./File Immagini/img-freccia.svg" class="img-p">Ordini</b><br> 
+                        <b class="b"><img src="img/img-freccia.svg" class="img-p">Ordini</b><br> 
                         Qui puoi visualizzare tutti gli ordini effettuati dagli utenti.<br>
                         Puoi <b>eliminare</b> un ordine o<br> 
                         effettuare una <b>ricerca</b> per <b>parametri</b> o per <b>data</b> <em>(da data x a data y)</em>.<br>
@@ -332,9 +336,9 @@
                             <tr><th>ID Ordine</th><th>ID Prodotto</th><th>Pagato</th><th>Ordinato da</th><th>ID Indirizzo</th><th>Data Ordine</th><th>Elimina</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>ID1</td><td>1</td><td>10 &#8364</td><td>email1@gmail.com</td><td>1</td><td>2022-01-01</td><td><img src="./File Immagini/img-elimina.svg" class="img-tab"></td></tr>
-                            <tr><td>ID2</td><td>2</td><td>50 &#8364</td><td>email2@gmail.com</td><td>2</td><td>2023-02-15</td><td><img src="./File Immagini/img-elimina.svg" class="img-tab"></td></tr>
-                            <tr><td>ID3</td><td>3</td><td>10.99 &#8364</td><td>email3@gmail.com</td><td>3</td><td>2024-03-10</td><td><img src="./File Immagini/img-elimina.svg" class="img-tab"></td></tr>
+                            <tr><td>ID1</td><td>1</td><td>10 &#8364</td><td>email1@gmail.com</td><td>1</td><td>2022-01-01</td><td><img src="img/img-elimina.svg" class="img-tab"></td></tr>
+                            <tr><td>ID2</td><td>2</td><td>50 &#8364</td><td>email2@gmail.com</td><td>2</td><td>2023-02-15</td><td><img src="img/img-elimina.svg" class="img-tab"></td></tr>
+                            <tr><td>ID3</td><td>3</td><td>10.99 &#8364</td><td>email3@gmail.com</td><td>3</td><td>2024-03-10</td><td><img src="img/img-elimina.svg" class="img-tab"></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -343,7 +347,7 @@
                 <div id="utenti" class="container-sezione" style="display: none;">
                     <!-- Contenuto della sezione Utenti -->
                     <p class="p">
-                        <b class="b"><img src="./File Immagini/img-freccia.svg" class="img-p">Utenti</b><br> 
+                        <b class="b"><img src="img/img-freccia.svg" class="img-p">Utenti</b><br> 
                         Qui puoi visualizzare tutti gli utenti registrati al sito.<br>
                         Puoi <b>modificare</b> o <b>eliminare</b> utenti, <b>aggiungere</b> un <b>amministratore</b>,<br>  
                         <b>ricercare</b> un <b>indirizzo</b> di un profilo o effettuare una <b>ricerca</b> per <b>parametri</b>/per <b>ruolo</b>.
@@ -353,13 +357,13 @@
                             <div class="dettagli">
                                 <h2 class="dett-3">Aggiungi Admin</h2>
                             </div>
-                            <img src="./File Immagini/img-aggiunta_utente.svg" alt="ordini">
+                            <img src="img/img-aggiunta_utente.svg" alt="ordini">
                         </div>
                         <div class="riquadro" onclick="togglePopup('popup5')">
                             <div class="dettagli">
                                 <h2 class="dett-3">Indirizzi Utenti</h2>
                             </div>
-                            <img src="./File Immagini/img-casa.svg" alt="ordini">
+                            <img src="img/img-casa.svg" alt="ordini">
                         </div>
 
                         <div id="popup4" class="sfondo-popup"> 
@@ -379,7 +383,7 @@
                                     <label class="form-label" for="password">Password (max 50 caratteri):</label> 
                                     <input class="form-input" type="password" placeholder="Inserisci la password" maxlength="50" id="password" name="password" required>      
                                     <div class="selezione">
-                                        <button class="button-chiudi-popup" type="reset" onclick="togglePopup('popup4')"><img src="./File Immagini/img-freccia_indietro.svg" class="img-button">Annulla</button> 
+                                        <button class="button-chiudi-popup" type="reset" onclick="togglePopup('popup4')"><img src="img/img-freccia_indietro.svg" class="img-button">Annulla</button> 
                                         <button class="button-submit" type="submit">Aggiungi</button> 
                                     </div>
                                 </form>
@@ -407,7 +411,7 @@
                                     </tbody>
                                 </table>                                                          
                                 <div class="selezione">
-                                    <button class="button-chiudi-popup" onclick="togglePopup('popup5')"><img src="./File Immagini/img-freccia_indietro.svg" class="img-button">Indietro</button> 
+                                    <button class="button-chiudi-popup" onclick="togglePopup('popup5')"><img src="img/img-freccia_indietro.svg" class="img-button">Indietro</button> 
                                 </div>
                             </div> 
                         </div>
@@ -426,9 +430,9 @@
                             <tr><th>Nome</th><th>Cognome</th><th>Email</th><th>Telefono</th><th>Ruolo</th><th>Modifica</th><th>Elimina</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>Gennaro</td><td>Sinicario</td><td>email1@gmail.com</td><td>123456789</td><td>Utente</td><td><img src="./File Immagini/img-matita.svg" class="img-tab" onclick="togglePopup('popup7')"></td><td><img src="./File Immagini/img-elimina.svg" class="img-tab"></td></tr>
-                            <tr><td>Antonio</td><td>Margio</td><td>email2@gmail.com</td><td>123456789</td><td>Amministratore</td><td><img src="./File Immagini/img-matita.svg" class="img-tab" onclick="togglePopup('popup7')"></td><td><img src="./File Immagini/img-elimina.svg" class="img-tab"></td></tr>
-                            <tr><td>Francesco</td><td>Gragnaniello</td><td>email3@gmail.com</td><td>123456789</td><td>Utente</td><td><img src="./File Immagini/img-matita.svg" class="img-tab" onclick="togglePopup('popup7')"></td><td><img src="./File Immagini/img-elimina.svg" class="img-tab"></td></tr>
+                            <tr><td>Gennaro</td><td>Sinicario</td><td>email1@gmail.com</td><td>123456789</td><td>Utente</td><td><img src="img/img-matita.svg" class="img-tab" onclick="togglePopup('popup7')"></td><td><img src="img/img-elimina.svg" class="img-tab"></td></tr>
+                            <tr><td>Antonio</td><td>Margio</td><td>email2@gmail.com</td><td>123456789</td><td>Amministratore</td><td><img src="img/img-matita.svg" class="img-tab" onclick="togglePopup('popup7')"></td><td><img src="img/img-elimina.svg" class="img-tab"></td></tr>
+                            <tr><td>Francesco</td><td>Gragnaniello</td><td>email3@gmail.com</td><td>123456789</td><td>Utente</td><td><img src="img/img-matita.svg" class="img-tab" onclick="togglePopup('popup7')"></td><td><img src="img/img-elimina.svg" class="img-tab"></td></tr>
                         </tbody>
                     </table>
                     <div id="popup7" class="sfondo-popup"> 
@@ -454,7 +458,7 @@
                                     <option value="Amministratore">Amministratore</option>  
                                 </select> 
                                 <div class="selezione">
-                                    <button class="button-chiudi-popup" type="reset" onclick="togglePopup('popup7')"><img src="./File Immagini/img-freccia_indietro.svg" class="img-button">Annulla</button> 
+                                    <button class="button-chiudi-popup" type="reset" onclick="togglePopup('popup7')"><img src="img/img-freccia_indietro.svg" class="img-button">Annulla</button> 
                                     <button class="button-submit" type="submit">Modifica</button> 
                                 </div>
                             </form>
@@ -465,6 +469,13 @@
             </div>
         </div>
     </div>
+    
+    </div>
+    
+    
+     <section class="footer-container>">
+     	<%@include file="fragment/footer.jsp" %>
+    </section>
     <script>
         //CONTRASSEGNO_NAV
         function showSection(sectionId, navId){
@@ -563,5 +574,9 @@
         risultatoH2_2.textContent = rowCount2;
         risultatoH2_3.textContent = rowCount3;
     </script>
+    
+    
+    
+   
 </body>
 </html>
