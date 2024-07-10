@@ -5,8 +5,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import model.SpedizioneBean;
 import model.SpedizioneDAODataSource;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -16,21 +19,23 @@ public class RetriveSpedizioni extends HttpServlet {
     private SpedizioneDAODataSource spedizioneDAO = new SpedizioneDAODataSource();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int idAccount = 0;
-        try {
-            idAccount = Integer.parseInt(request.getParameter("ID_ACCOUNT"));
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
+        HttpSession session = request.getSession(false); // Non crea una nuova sessione se non esiste
+        if (session == null || session.getAttribute("ID_ACCOUNT") == null) {
+            // Utente non autenticato, reindirizza alla pagina di login
+            response.sendRedirect("login.jsp");
+            return;
         }
+        
+        int idAccount = (int) session.getAttribute("ID_ACCOUNT");
 
         try {
             SpedizioneBean spedizione = spedizioneDAO.doRetrieveByKey(idAccount);
-            request.setAttribute("spedizione", spedizione);  // Passa l'oggetto SpedizioneBean alla JSP
+            request.setAttribute("spedizione", spedizione);
         } catch (SQLException e) {
             throw new ServletException("Cannot retrieve spedizione from database", e);
         }
 
-        request.getRequestDispatcher("/spedizione.jsp").forward(request, response);
+        request.getRequestDispatcher("/profilo.jsp").forward(request, response);
     }
-}
 
+}

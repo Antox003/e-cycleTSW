@@ -57,27 +57,29 @@ public class Login extends HttpServlet {
         
         try {
             Connection con = DriverManagerConnectionPool.getConnection();
-            String sql = "SELECT Nome, Cognome, Data_nascita, Email, password, Telefono, ruolo FROM UserAccount";
+            String sql = "SELECT ID_ACCOUNT ,Nome, Cognome, Data_nascita, Email, password, Telefono, ruolo FROM UserAccount";
             
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery(sql);
             
             while (rs.next()) {
-                if (email.compareTo(rs.getString(4)) == 0) {
+                if (email.compareTo(rs.getString(5)) == 0) {
                     String psw = checkPsw(password);
-                    if (psw.compareTo(rs.getString(5)) == 0) {
+                    if (psw.compareTo(rs.getString(6)) == 0) {
                         control = true;
                         UserBean registeredUser = new UserBean();
-                        registeredUser.setNome(rs.getString(1));
-                        registeredUser.setCognome(rs.getString(2));
-                        registeredUser.setData_nascita(rs.getString(3));
-                        registeredUser.setEmail(rs.getString(4));
-                        registeredUser.setTelefono(rs.getString(6));
-                        registeredUser.setRole(rs.getString(7));
+                        registeredUser.setCode(rs.getInt(1));
+                        registeredUser.setNome(rs.getString(2));
+                        registeredUser.setCognome(rs.getString(3));
+                        registeredUser.setData_nascita(rs.getString(4));
+                        registeredUser.setEmail(rs.getString(5));
+                        registeredUser.setTelefono(rs.getString(7));
+                        registeredUser.setRole(rs.getString(8));
                         request.getSession().setAttribute("registeredUser", registeredUser);
                         request.getSession().setAttribute("role", registeredUser.getRole());
-                        request.getSession().setAttribute("email", rs.getString(4));
-                        request.getSession().setAttribute("nome", rs.getString(1));
+                        request.getSession().setAttribute("email", rs.getString(5));
+                        request.getSession().setAttribute("nome", rs.getString(2));
+                        request.getSession().setAttribute("ID_ACCOUNT", rs.getInt(1));
                         
                         if ("admin".equals(registeredUser.getRole())) {
                             request.getSession().setAttribute("isAdmin", Boolean.TRUE);

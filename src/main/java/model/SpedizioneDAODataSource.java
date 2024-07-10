@@ -1,20 +1,16 @@
 package model;
 
 import java.sql.Connection;
-
-
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SpedizioneDAODataSource implements IBeanDAO<SpedizioneBean> {
 
@@ -43,35 +39,30 @@ public class SpedizioneDAODataSource implements IBeanDAO<SpedizioneBean> {
     private static final String COLUMN_CIVICO = "Civico";
     private static final String COLUMN_ACCOUNT = "ID_ACCOUNT";
 
-
-    
-
     @Override
-    public synchronized void doSave(SpedizioneBean product) throws SQLException {
+    public synchronized void doSave(SpedizioneBean spedizione) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
-        String insertSQL = "INSERT INTO " + TABLE_NAME + " (" + COLUMN_STATO + ", " + COLUMN_PROVINCIA + ", " + COLUMN_CITTA + ", "+ COLUMN_CAP + ", " + COLUMN_INDIRIZZO  +  ", " +  COLUMN_CIVICO + ", " + COLUMN_ACCOUNT + ") VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String insertSQL = "INSERT INTO " + TABLE_NAME + " (" + COLUMN_STATO + ", " + COLUMN_PROVINCIA + ", " +
+                COLUMN_CITTA + ", " + COLUMN_CAP + ", " + COLUMN_INDIRIZZO + ", " + COLUMN_CIVICO + ", " +
+                COLUMN_ACCOUNT + ") VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
             connection = ds.getConnection();
             System.out.println("Database connection established for doSave");
 
             preparedStatement = connection.prepareStatement(insertSQL);
-            preparedStatement.setString(1, product.getStato());
-            preparedStatement.setString(2, product.getProvincia());
-            preparedStatement.setString(3, product.getCitta());
-            preparedStatement.setString(4, product.getCap());
-            preparedStatement.setString(5, product.getIndirizzo());
-            preparedStatement.setString(6, product.getCivico());
-            preparedStatement.setInt(7, product.getAccount());
-
-
-            
-
+            preparedStatement.setString(1, spedizione.getStato());
+            preparedStatement.setString(2, spedizione.getProvincia());
+            preparedStatement.setString(3, spedizione.getCitta());
+            preparedStatement.setString(4, spedizione.getCap());
+            preparedStatement.setString(5, spedizione.getIndirizzo());
+            preparedStatement.setString(6, spedizione.getCivico());
+            preparedStatement.setInt(7, spedizione.getAccount());
 
             preparedStatement.executeUpdate();
-            System.out.println("Product saved: " + product.getStato());
+            System.out.println("Spedizione saved: " + spedizione.getStato());
 
         } finally {
             try {
@@ -85,7 +76,7 @@ public class SpedizioneDAODataSource implements IBeanDAO<SpedizioneBean> {
     }
 
     @Override
-    public synchronized boolean doDelete(int code) throws SQLException {
+    public synchronized boolean doDelete(int idAccount) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -98,10 +89,10 @@ public class SpedizioneDAODataSource implements IBeanDAO<SpedizioneBean> {
             System.out.println("Database connection established for doDelete");
 
             preparedStatement = connection.prepareStatement(deleteSQL);
-            preparedStatement.setInt(1, code);
+            preparedStatement.setInt(1, idAccount);
 
             result = preparedStatement.executeUpdate();
-            System.out.println("Product deleted with ID: " + code);
+            System.out.println("Spedizione deleted with ID_ACCOUNT: " + idAccount);
 
         } finally {
             try {
@@ -120,9 +111,11 @@ public class SpedizioneDAODataSource implements IBeanDAO<SpedizioneBean> {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
-        List<SpedizioneBean> spedizione = new ArrayList<>();
+        List<SpedizioneBean> spedizioni = new ArrayList<>();
 
-        String selectSQL = "SELECT " + COLUMN_STATO + ", " + COLUMN_PROVINCIA + ", " + COLUMN_CITTA + ", "+ COLUMN_CAP + ", " + COLUMN_INDIRIZZO  +  ", " +  COLUMN_CIVICO + ", " + COLUMN_ACCOUNT+ " FROM " + TABLE_NAME;
+        String selectSQL = "SELECT " + COLUMN_STATO + ", " + COLUMN_PROVINCIA + ", " + COLUMN_CITTA + ", " +
+                COLUMN_CAP + ", " + COLUMN_INDIRIZZO + ", " + COLUMN_CIVICO + ", " + COLUMN_ACCOUNT +
+                " FROM " + TABLE_NAME;
 
         try {
             connection = ds.getConnection();
@@ -130,22 +123,20 @@ public class SpedizioneDAODataSource implements IBeanDAO<SpedizioneBean> {
             rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                SpedizioneBean bean = new SpedizioneBean();
-                bean.setAccount(rs.getInt("ID_ACCOUNT"));
-                bean.setStato(rs.getString("Stato"));
-                bean.setProvincia(rs.getString("Provincia"));
-                bean.setCitta(rs.getString("Citta"));
-                bean.setCap(rs.getString("Cap"));
-                bean.setIndirizzo(rs.getString("Indirizzo"));
-                bean.setCivico(rs.getString("Civico"));
-                
-				spedizione.add(bean);
-				
-				
+                SpedizioneBean spedizione = new SpedizioneBean();
+                spedizione.setStato(rs.getString(COLUMN_STATO));
+                spedizione.setProvincia(rs.getString(COLUMN_PROVINCIA));
+                spedizione.setCitta(rs.getString(COLUMN_CITTA));
+                spedizione.setCap(rs.getString(COLUMN_CAP));
+                spedizione.setIndirizzo(rs.getString(COLUMN_INDIRIZZO));
+                spedizione.setCivico(rs.getString(COLUMN_CIVICO));
+                spedizione.setAccount(rs.getInt(COLUMN_ACCOUNT));
+
+                spedizioni.add(spedizione);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new SQLException("Error retrieving products from database.", e);
+            throw new SQLException("Error retrieving spedizioni from database.", e);
         } finally {
             try {
                 if (rs != null) rs.close();
@@ -155,38 +146,39 @@ public class SpedizioneDAODataSource implements IBeanDAO<SpedizioneBean> {
                 e.printStackTrace();
             }
         }
-        return spedizione;
+        return spedizioni;
     }
-
 
     @Override
     public SpedizioneBean doRetrieveByKey(int idAccount) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
         SpedizioneBean spedizione = null;
 
-        String selectSQL = "SELECT * FROM SPEDIZIONE WHERE ID_ACCOUNT = ?";
+        String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ACCOUNT + " = ?";
 
         try {
             connection = ds.getConnection();
             preparedStatement = connection.prepareStatement(selectSQL);
             preparedStatement.setInt(1, idAccount);
 
-            ResultSet rs = preparedStatement.executeQuery();
+            rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
                 spedizione = new SpedizioneBean();
-                spedizione.setStato(rs.getString("Stato"));
-                spedizione.setProvincia(rs.getString("Provincia"));
-                spedizione.setCitta(rs.getString("Citta"));
-                spedizione.setCap(rs.getString("CAP"));
-                spedizione.setIndirizzo(rs.getString("Indirizzo"));
-                spedizione.setCivico(rs.getString("Civico"));
-                spedizione.setAccount(rs.getInt("ID_ACCOUNT"));
+                spedizione.setStato(rs.getString(COLUMN_STATO));
+                spedizione.setProvincia(rs.getString(COLUMN_PROVINCIA));
+                spedizione.setCitta(rs.getString(COLUMN_CITTA));
+                spedizione.setCap(rs.getString(COLUMN_CAP));
+                spedizione.setIndirizzo(rs.getString(COLUMN_INDIRIZZO));
+                spedizione.setCivico(rs.getString(COLUMN_CIVICO));
+                spedizione.setAccount(rs.getInt(COLUMN_ACCOUNT));
             }
 
         } finally {
             try {
+                if (rs != null) rs.close();
                 if (preparedStatement != null) preparedStatement.close();
                 if (connection != null) connection.close();
             } catch (SQLException e) {
@@ -196,7 +188,4 @@ public class SpedizioneDAODataSource implements IBeanDAO<SpedizioneBean> {
 
         return spedizione;
     }
-    
-    
-    
 }

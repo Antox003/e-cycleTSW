@@ -55,7 +55,7 @@
                     </tr>
                     <tr>
                         <th>Stato Account</th>
-                        <td>Attivo</td>
+                        <td>Attivo<%= String.valueOf(user.getCode()) %></td>
                     </tr>
                 </table>
                 <a class="modifica"><img src="img/img-matita.svg" class="img-cont"><b><u>Modifica Informazioni</u></b></a> 
