@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="model.UserBean, java.util.List, model.SpedizioneBean, model.SpedizioneDAODataSource"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,35 +13,37 @@
      	<%@include file="fragment/header.jsp" %>
     </section>
     
+    <section class="max">
+    
         <div class="container-profilo">
         <br>
             <div class="profilo">
-                <h3 class="titolo"><img src="img/img-utente.svg" class="img-h3"> Il mio Profilo</h3>
+                <h3 class="titolo">Il mio Profilo</h3>
             </div>
-            
+           
              <br>
             <h1 class="titolo-info"><img src="img/img-utente.svg" class="img-riepilogo"> Informazioni Personali</h1>    
             <div class="riepilogo">
                 <table class="tabella-utente">
                     <tr>
                         <th>Nome</th>
-                        <td>Mario</td>
+                        <td><%= user.getNome() %></td>
                     </tr>
                     <tr>
                         <th>Cognome</th>
-                        <td>Rossi</td>
+                        <td><%= user.getCognome() %></td>
                     </tr>
                     <tr>
                         <th>Email</th>
-                        <td>mario@rossi.it</td>
+                        <td><%= user.getEmail() %></td>
                     </tr>
                     <tr>
                         <th>Numero di Telefono</th>
-                        <td>1234567890</td>
+                        <td><%= user.getTelefono() %></td>
                     </tr>
                     <tr>
-                        <th>Data di Registrazione</th>
-                        <td>01/01/2020</td>
+                        <th>Data di Nascita</th>
+                        <td><%= user.getData_nascita() %></td>
                     </tr>
                     <tr>
                         <th>Numero Ordini</th>
@@ -61,43 +63,49 @@
             <br>
             <hr>
             <br>
+
+
             
             <h1 class="titolo-info"><img src="img/img-casa.svg" class="img-riepilogo"> Indirizzo di spedizione</h1>
             <div class="riepilogo">
+            
+               <%
+        SpedizioneBean spedizione = (SpedizioneBean) request.getAttribute("spedizione");
+        if (spedizione != null) {
+        %>
                 <table class="tabella-utente">
                     <tr>
-                        <th>Nome completo</th>
-                        <td>Gennaro Sinicario</td>
-                    </tr>
-                    <tr>
-                        <th>Paese</th>
-                        <td>Italia</td>
-                    </tr>
-                    <tr>
-                        <th>Provincia</th>
-                        <td>AV</td>
-                    </tr>
-                    <tr>
-                        <th>Città</th>
-                        <td>Pratola Serra</td>
-                    </tr>
-                    <tr>
-                        <th>CAP</th>
-                        <td>83039</td>
-                    </tr>
-                    <tr>
-                        <th>Indirizzo</th>
-                        <td>Piazza Dei Petruzziello</td>
-                    </tr>
-                    <tr>
-                        <th>Numero Civico</th>
-                        <td>6</td>
-                    </tr>
-                    <tr>
-                        <th>Numero di Telefono</th>
-                        <td>1234567890</td>
-                    </tr>
-                </table>
+                <th>Nome completo</th>
+                <td><%= user.getNome() %> <%= user.getCognome() %></td>
+            </tr>
+            <tr>
+                <th>Stato</th>
+                <td><%= spedizione.getStato() %></td>
+            </tr>
+            <tr>
+                <th>Provincia</th>
+                <td><%= spedizione.getProvincia() %></td>
+            </tr>
+            <tr>
+                <th>Città</th>
+                <td><%= spedizione.getCitta() %></td>
+            </tr>
+            <tr>
+                <th>CAP</th>
+                <td><%= spedizione.getCap() %></td>
+            </tr>
+            <tr>
+                <th>Indirizzo</th>
+                <td><%= spedizione.getIndirizzo() %></td>
+            </tr>
+            <tr>
+                <th>Numero Civico</th>
+                <td><%= spedizione.getCivico() %></td>
+            </tr>
+             <% } else { %>
+        <p>Nessun indirizzo di spedizione trovato per questo account.</p>
+        <% } %>
+        </table>
                 <a class="modifica"><img src="img/img-matita.svg" class="img-cont"><b><u>Modifica Indirizzo</u></b></a>
             </div>
             <br>
@@ -137,8 +145,12 @@
             <br>          
         </div>
         
+        </section>
+        
         <section class="footer-container>">
      	<%@include file="fragment/footer.jsp" %>
     </section>
+    
     </body>
 </html>
+

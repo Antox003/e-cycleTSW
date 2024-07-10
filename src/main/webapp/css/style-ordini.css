@@ -1,21 +1,16 @@
-@charset "ISO-8859-1";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 *{
 	font-family: "Poppins", sans-serif;
 }
 
-body {
+body{
+    background-color: #A1C3A8;
     margin: 0;
     padding: 0; 
-    background-color: #A1C3A8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: auto;
 }
 
-header{
+.titoli{
     margin: auto;
     width: 90%;
     height: auto;
@@ -26,12 +21,15 @@ header{
 }
 
 .container-ordini{
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
     width: 70%;
     height: auto;
     background-color: #FFF;
     border-radius: 20px;
     box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.30);
-    margin: 40px 0;
+    margin: 40px auto;
 }
 
 .titolo{

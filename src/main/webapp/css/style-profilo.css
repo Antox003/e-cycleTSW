@@ -13,6 +13,11 @@ body {
   overflow: auto;
 }
 
+.max{
+	display:flex;
+	justify-content:center;
+}
+
 .profilo{
 	text-align:center;
 }
