@@ -25,7 +25,6 @@ public class RetriveSpedizioni extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false); // Non crea una nuova sessione se non esiste
         if (session == null || session.getAttribute("ID_ACCOUNT") == null) {
-            // Utente non autenticato, reindirizza alla pagina di login
             response.sendRedirect("login.jsp");
             return;
         }
