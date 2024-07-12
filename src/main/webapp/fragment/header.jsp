@@ -31,7 +31,7 @@
                     <li class="menu-profilo">
                         <a><img src="img/img-utente.svg" class="img-nav" alt="Profilo Icon"><span class="nav-testo">Profilo<img src="img/img-frecciagiu.svg" class="freccia-giu"></span></a>
                         <ul class="sottomenu">
-                            <li><a href="spedizione"><img src="img/img-settaggi.svg" class="img-nav" alt="Settaggi Icon">Profilo</a></li>
+                            <li><a href="profilo"><img src="img/img-settaggi.svg" class="img-nav" alt="Settaggi Icon">Profilo</a></li>
                             <li><a href="ordini.jsp"><img src="img/img-ordini.svg" class="img-nav" alt="Ordini Icon">Ordini</a></li>
                             <li><a class="logout" href="Logout"><img src="img/img-logout.svg" class="img-nav" alt="Logout Icon">Esci</a></li>
                         </ul>

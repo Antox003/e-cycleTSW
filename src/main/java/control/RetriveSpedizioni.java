@@ -16,7 +16,7 @@ import model.PagamentoDAODataSource;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/spedizione")
+@WebServlet("/profilo")
 public class RetriveSpedizioni extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private SpedizioneDAODataSource spedizioneDAO = new SpedizioneDAODataSource();
