@@ -16,7 +16,7 @@ import model.ProductDAODataSource;
 /**
  * Servlet implementation class ProductListServlet
  */
-@WebServlet("/ProductList")
+@WebServlet("/home")
 public class ProductList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProductDAODataSource productDAO = new ProductDAODataSource();

@@ -19,6 +19,8 @@ public class ProductBean {
     private String DimPes;
     private String SO;
     private String Acqua;
+	private int quantity;
+
     
 
     public int getCode() {
@@ -168,7 +170,23 @@ public class ProductBean {
     
     
     
-    
+    public void setQuantity(int newQuantity) {
+		quantity = newQuantity;
+	}
+	
+	public void decreaseQuantity() {
+		if (quantity > 0) {
+			quantity--;
+		}
+	}
+	
+	public void addQuantity() {
+		quantity++;
+	}
+	
+	public int getQuantity() {
+		return quantity;
+	}
     
     
     

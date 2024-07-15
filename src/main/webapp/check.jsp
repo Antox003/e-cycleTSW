@@ -23,7 +23,7 @@
             <h1 class="title">Ordine effettuato con successo</h1>
             <br>
             <button>
-                <a href="ProductList">Torna alla home</a>
+                <a href="home">Torna alla home</a>
             </button>
         </div>
         </div>

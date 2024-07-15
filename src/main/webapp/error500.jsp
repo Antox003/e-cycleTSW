@@ -17,7 +17,7 @@
                 <h1>500</h1>
                 <p>Errore del Server</p>
                 <p>Ci scusiamo per l'inconveniente, stiamo lavorando per risolvere il problema.</p>
-                <a href="ProductList" class="button">Torna alla Home</a>
+                <a href="home" class="button">Torna alla Home</a>
             </div>
         </div>
     </div>

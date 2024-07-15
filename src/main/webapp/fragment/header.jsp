@@ -18,7 +18,7 @@
             </label>
             <nav>
                 <ul class="menu">
-                    <li><a href="ProductList"><img src="img/img-casa.svg" class="img-nav" alt="Home Icon"><span class="nav-testo">Home</span></a></li>
+                    <li><a href="home"><img src="img/img-casa.svg" class="img-nav" alt="Home Icon"><span class="nav-testo">Home</span></a></li>
                     <li><a href="carrello.jsp"><img src="img/img-carrello.svg" class="img-nav" alt="Carrello Icon"><span class="nav-testo">Carrello</span></a></li>
                      <%
                      UserBean user = (UserBean) session.getAttribute("registeredUser");

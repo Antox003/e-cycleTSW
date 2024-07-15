@@ -44,7 +44,7 @@
                        
                         <% } else {%>
                         <button class="cart">
-                            <a href="carrello.jsp">
+                           <a href="CartControl?action=aggiungi&codice=<%= product.getCode() %>">
                                 <img src="img/cart-add.svg" alt="">Aggiungi al carrello
                             </a>
                         </button>

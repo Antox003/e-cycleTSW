@@ -87,7 +87,7 @@ public class Login extends HttpServlet {
                             request.getSession().setAttribute("isAdmin", Boolean.FALSE);
                         }
                         
-                        redirectedPage = "/ProductList";
+                        redirectedPage = "/home";
                         DriverManagerConnectionPool.releaseConnection(con);
                         break;
                     }
