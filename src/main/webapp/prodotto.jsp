@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ page import="model.ProductBean" %>
-<%@ page import="java.util.List" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" import="model.ProductBean,java.util.List "%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +17,6 @@
 <section id="riquadro">
     <div class="container-max">
         <div class="container-prodotto">
-            <%-- Verifica se l'oggetto product è presente nell'attributo della richiesta --%>
 		<% ProductBean product = (ProductBean) request.getAttribute("product"); %>
             <% if (product != null) { %>
                 <div class="container-img">

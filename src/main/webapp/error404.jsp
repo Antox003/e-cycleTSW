@@ -16,7 +16,7 @@
             <div class="text">
                 <h1>404</h1>
                 <p>Pagina non trovata</p>
-                <p>Sembra che il server abbia riciclato questa pagina.</p>
+                <p>Sembra che questa porta sia chiusa.</p>
                 <a href="home" class="button">Torna alla Home</a>
             </div>
         </div>

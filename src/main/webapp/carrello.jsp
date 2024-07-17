@@ -83,7 +83,7 @@
             </div>
             <div class="costo-totale"><%=totale%> &euro;</div>
         </div>
-        <button class="pulsante">Paga ora</button>
+        <button class="pulsante"> <a href=""> Paga ora </a></button>
         <br>
     </div>
     <% } else { %>
