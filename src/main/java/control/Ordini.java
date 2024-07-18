@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.CartBean;
 import model.OrdiniBean;
 import model.OrdiniDAODataSource;
+import model.UserBean;
 
 @WebServlet("/ordini")
 public class Ordini extends HttpServlet {
@@ -50,4 +52,9 @@ public class Ordini extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
+
+	public void saveOrder(CartBean carrello, UserBean user) {
+		// TODO Auto-generated method stub
+		
+	}
 }

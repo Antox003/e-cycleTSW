@@ -45,6 +45,7 @@ public class ProductList extends HttpServlet {
 
 	        RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 	        dispatcher.forward(request, response);
+	        
 	    }
 
 	/**

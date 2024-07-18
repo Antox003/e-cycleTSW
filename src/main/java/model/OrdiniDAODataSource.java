@@ -1,9 +1,11 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.Context;
@@ -198,18 +200,6 @@ public class OrdiniDAODataSource implements IBeanDAO<OrdiniBean> {
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     @Override
     public OrdiniBean doRetrieveByKey(int idOrdine) throws SQLException {
         Connection connection = null;
@@ -249,4 +239,59 @@ public class OrdiniDAODataSource implements IBeanDAO<OrdiniBean> {
 
         return ordine;
     }
+    
+    
+   /*
+
+    public void saveOrder(OrdiniBean ordini, ProductBean prodotto, UserBean user, SpedizioneBean spedizione, PagamentoBean pagamento) throws SQLException {
+        String insertOrderSQL = "INSERT INTO ORDINI (Numero_Prodotti, Data_acquisto, ID_ACCOUNT, Nome_prodotto, ID_INDIRIZZO, Numero_carta) VALUES (?, ?, ?, ?, ?, ?)";
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        
+        try {
+            connection = ds.getConnection();
+            preparedStatement = connection.prepareStatement(insertOrderSQL);
+            
+            // Verifica dei dati prima dell'inserimento
+            if (ordini.getNumeroprodotti() != null && !ordini.getNumeroprodotti().isEmpty() &&
+                prodotto.getNome() != null && !prodotto.getNome().isEmpty() &&
+                spedizione.getIndirizzo() > 0 && pagamento.getNumerocarta() != null && !pagamento.getNumerocarta().isEmpty()) {
+                
+                // Imposta i parametri del PreparedStatement
+                preparedStatement.setString(1, ordini.getNumeroprodotti());
+                preparedStatement.setDate(2, Date.valueOf(LocalDate.now())); // Data di acquisto corrente
+                preparedStatement.setInt(3, user.getCode()); // ID_ACCOUNT dell'utente
+                preparedStatement.setString(4, prodotto.getNome()); // Nome del prodotto
+                preparedStatement.setString(5, spedizione.getIndirizzo()); // ID_INDIRIZZO dell'utente
+                preparedStatement.setString(6, pagamento.getNumerocarta()); // Numero della carta di pagamento
+                
+                // Esegui l'update nel database
+                preparedStatement.executeUpdate();
+            } else {
+                throw new IllegalArgumentException("Dati dell'ordine non validi");
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException("Errore durante il salvataggio dell'ordine nel database", e);
+        } finally {
+            // Chiudi le risorse
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+*/
 }
+

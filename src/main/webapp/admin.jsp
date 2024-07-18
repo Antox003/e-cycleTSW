@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="model.UserBean"%>
+    pageEncoding="ISO-8859-1" import="model.UserBean,java.sql.SQLException ,java.util.List,model.ProductBean,model.ProductDAODataSource"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,18 +10,11 @@
 </head>
 <body>
 
-<section class="header-container>">
-     	<%@include file="fragment/header.jsp" %>
-</section>
+ <section class="header-container">
+        <%@include file="fragment/header.jsp" %>
+    </section>
 
-	<%
-		Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
-	if ((isAdmin == null) || (!isAdmin)){
-		response.sendRedirect(request.getContextPath()+ "/ProductList");
-		return;
-	}
-	%>
-	
+
     <div class="container-admin">
         <h3 class="titolo">Gestione Sito Web <img src="img/img-gestione.svg" class="img-h3"></h3>
         <div class="contenuto">
@@ -47,13 +40,11 @@
                     </div>
                 </nav>
             </div>
-                                <%   UserBean utente = (UserBean) session.getAttribute("registeredUser"); %>
-
 
             <div class="main">
                 <div id="dashboard" class="container-sezione">
                     <!-- Contenuto della sezione Dashboard -->
-                    <p class="p_titolo"><b class="titolo_p"><em>Benvenuto <%=utente.getNome() %> <%=utente.getCognome() %>!</em></b><br>Qui puoi visualizzare una panoramica del sito.
+                    <p class="p_titolo"><b class="titolo_p"><em>Benvenuto nomeadmin!</em></b><br>Qui puoi visualizzare una panoramica del sito.
                         <br>Esplora la barra di <b>navigazione laterale</b> per più funzioni!
                     </p>
                     <p class="p"> 
@@ -205,11 +196,12 @@
                         <div id="popup3" class="sfondo-popup"> 
                             <div class="container-popup"> 
                                 <h2 class="h2-popup">Aggiungi un articolo al Catalogo</h2><br> 
-                                <form class="container-form"> 
+                                <form class="container-form" action="NuovoProdotto" method="post"> 
                                     <div class="selezione">
                                         <button class="button-chiudi-popup" type="reset" onclick="togglePopup('popup3')"><img src="img/img-freccia_indietro.svg" class="img-button">Annulla</button> 
                                     </div>
                                     <br>
+                                     <input type="hidden" name="ID_PRODOTTO" value="">
                                     <label class="form-label" for="nome">Nome (max 50 caratteri):</label> 
                                     <input class="form-input" type="text" placeholder="Inserisci il nome" maxlength="50" id="nome" name="nome" required> 
                                     <label class="form-label" for="descrizione">Descrizione (max 500 caratteri):</label> 
@@ -225,6 +217,8 @@
                                     <input class="form-input" type="text" placeholder="Inserisci fotocamera" maxlength="300" id="fotocamera" name="fotocamera" required> 
                                     <label class="form-label" for="archiviazione">Archiviazione:</label> 
                                     <input class="form-input" type="text" placeholder="Inserisci archiviazione" maxlength="300" id="archiviazione" name="archiviazione" required> 
+                                    <label class="form-label" for="archiviazione">Autenticazione:</label> 
+                                    <input class="form-input" type="text" placeholder="Inserisci autenticazione" maxlength="300" id="autenticazione" name="autenticazione" required> 
                                     <label class="form-label" for="chip">Chip:</label> 
                                     <input class="form-input" type="text" placeholder="Inserisci chip" id="chip" maxlength="300" name="chip" required> 
                                     <label class="form-label" for="sim">SIM:</label> 
@@ -255,24 +249,67 @@
                         <input type="text" id="searchCatalogo" onkeyup="searchTable('searchCatalogo', 'tableCatalogo', 'resultCatalogo')" placeholder="Cerca nel catalogo...">
                     </div>
                     <div id="resultCatalogo" class="risultati-ricerca"></div>
-                    <table id="tableCatalogo" class="tabella-utente">
-                        <thead>
-                            <tr><th>ID Prodotto</th><th>Nome</th><th>Elimina</th><th>Modifica</th><th>Specifiche e Pagina Prodotto</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>1</td><td>Pc</td><td><img src="img/img-elimina.svg" class="img-tab"></td><td><img src="img/img-matita.svg" class="img-tab" onclick="togglePopup('popup6')"></td><td><img src="img/img-dett_prodotto.svg" class="img-tab"></td></tr>
-                            <tr><td>2</td><td>Smartphone</td><td><img src="img/img-elimina.svg" class="img-tab"></td><td><img src="img/img-matita.svg" class="img-tab" onclick="togglePopup('popup6')"></td><td><img src="img/img-dett_prodotto.svg" class="img-tab"></td></tr>
-                            <tr><td>3</td><td>Tablet</td><td><img src="img/img-elimina.svg" class="img-tab"></td><td><img src="img/img-matita.svg" class="img-tab" onclick="togglePopup('popup6')"></td><td><img src="img/img-dett_prodotto.svg" class="img-tab"></td></tr>
-                        </tbody>
-                    </table>
+                     <table id="tableCatalogo" class="tabella-utente">
+    <thead>
+        <tr><th>ID Prodotto</th><th>Nome</th><th>Elimina</th><th>Modifica</th><th>Specifiche e Pagina Prodotto</th></tr>
+    </thead>
+    <tbody>
+        <% 
+        ProductDAODataSource productDAO = new ProductDAODataSource();
+        List<ProductBean> productList = null;
+
+        try {
+            productList = productDAO.doRetrieveAll(null); // Recupera tutti i prodotti
+        } catch (SQLException e) {
+            e.printStackTrace(); // Stampa l'errore nella console (consigliato per il debug)
+            out.println("<tr><td colspan='5'>Errore durante il recupero dei prodotti.</td></tr>"); // Messaggio di errore visibile nella tabella
+        }
+
+        if (productList != null) {
+            for (ProductBean product : productList) {
+        %>
+        <tr>
+            <td><%= product.getCode() %></td>
+            <td><%= product.getNome() %></td>
+            <td>
+                
+                <form action="EliminaProdotto" method="post" style="display:inline;">
+                       <input type="hidden" name="idProdotto" value="<%= product.getCode() %>">
+                         <button type="submit" class="eliminaBtn"> <img src="img/img-elimina.svg" class="img-tab"></button>
+                   </form>
+            </td>
+            <td>
+                <a href="ModificaProdotto?id=1&nome=Antonio">Modifica</a>
+                <img src="img/img-matita.svg" class="img-tab" onclick="togglePopup('popup6')">
+            </td>
+            <td>
+                <a href="ProductDetail?ID_PRODOTTO=<%= product.getCode() %>">
+                    <img src="img/img-dett_prodotto.svg" class="img-tab">
+                </a>
+            </td>
+        </tr>
+       <% 
+       System.out.println(product.getCode());
+            } // fine del loop for
+        } // fine del controllo sulla lista non null
+        %>
+    </tbody>
+</table>
+                
                     <div id="popup6" class="sfondo-popup"> 
                         <div class="container-popup"> 
                             <h2 class="h2-popup">Modifica un articolo del Catalogo</h2><br> 
-                            <form class="container-form"> 
+                            <form class="container-form" action="ModificaProdotto"> 
                                 <div class="selezione">
                                     <button class="button-chiudi-popup" type="reset" onclick="togglePopup('popup6')"><img src="img/img-freccia_indietro.svg" class="img-button">Annulla</button> 
                                 </div>
                                 <br>
+                                <% 
+                ProductBean prodotto = (ProductBean) request.getAttribute("prodotto");
+                
+            %>
+            
+            
                                 <label class="form-label" for="nome">Nome (max 50 caratteri):</label> 
                                 <input class="form-input" type="text" placeholder="Inserisci il nome" maxlength="50" id="nome" name="nome"> 
                                 <label class="form-label" for="descrizione">Descrizione (max 500 caratteri):</label> 
@@ -310,6 +347,7 @@
                                     <button class="button-chiudi-popup" type="reset" onclick="togglePopup('popup6')"><img src="img/img-freccia_indietro.svg" class="img-button">Annulla</button> 
                                     <button class="button-submit" type="submit">Modifica</button> 
                                 </div>
+                               
                             </form>  
                         </div> 
                     </div>
@@ -469,13 +507,6 @@
             </div>
         </div>
     </div>
-    
-    </div>
-    
-    
-     <section class="footer-container>">
-     	<%@include file="fragment/footer.jsp" %>
-    </section>
     <script>
         //CONTRASSEGNO_NAV
         function showSection(sectionId, navId){
@@ -574,9 +605,5 @@
         risultatoH2_2.textContent = rowCount2;
         risultatoH2_3.textContent = rowCount3;
     </script>
-    
-    
-    
-   
 </body>
 </html>

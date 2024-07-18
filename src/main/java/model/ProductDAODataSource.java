@@ -59,17 +59,31 @@ public class ProductDAODataSource implements IBeanDAO<ProductBean> {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
-        String insertSQL = "INSERT INTO " + TABLE_NAME + " (" + COLUMN_NOME + ", " + COLUMN_DESCRIZIONE + ", " + COLUMN_HOUSE + ", "+ COLUMN_PREZZO + ", " + COLUMN_DISPLAY  +  ", " +  COLUMN_CAMERA + ", " +  COLUMN_STORAGE + ", " +  COLUMN_AUTH+ ", " + COLUMN_CHIP + ", " + COLUMN_SIM + " , " + COLUMN_BLUE + ", " + COLUMN_CONNECT + ", " + COLUMN_RETE + ", " + COLUMN_BATTERIA + ", " + COLUMN_DIMPES + ", " + COLUMN_SO + ", " + COLUMN_ACQUA + ") VALUES (?, ?, ?)";
+        String insertSQL = "INSERT INTO " + TABLE_NAME + " (" + COLUMN_NOME + ", " + COLUMN_DESCRIZIONE + ", " + COLUMN_HOUSE + ", " + COLUMN_PREZZO + ", " + COLUMN_DISPLAY  + ", " + COLUMN_CAMERA + ", " + COLUMN_STORAGE + ", " + COLUMN_AUTH+ ", " + COLUMN_CHIP + ", " + COLUMN_SIM + ", " + COLUMN_BLUE + ", " + COLUMN_CONNECT + ", " + COLUMN_RETE + ", " + COLUMN_BATTERIA + ", " + COLUMN_DIMPES + ", " + COLUMN_SO + ", " + COLUMN_ACQUA + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             connection = ds.getConnection();
             System.out.println("Database connection established for doSave");
 
             preparedStatement = connection.prepareStatement(insertSQL);
-            preparedStatement.setString(1, product.getNome());
-            preparedStatement.setString(2, product.getDescrizione());
-            preparedStatement.setString(3, product.getCasa());
-            preparedStatement.setDouble(34, product.getPrezzo());
+            int index = 1;
+            preparedStatement.setString(index++, product.getNome());
+            preparedStatement.setString(index++, product.getDescrizione());
+            preparedStatement.setString(index++, product.getCasa());
+            preparedStatement.setDouble(index++, product.getPrezzo());
+            preparedStatement.setString(index++, product.getDisplay());
+            preparedStatement.setString(index++, product.getFotocamera());
+            preparedStatement.setString(index++, product.getArchiviazione());
+            preparedStatement.setString(index++, product.getAutenticazione());
+            preparedStatement.setString(index++, product.getChip());
+            preparedStatement.setString(index++, product.getSIM());
+            preparedStatement.setString(index++, product.getBluetooth());
+            preparedStatement.setString(index++, product.getConnettori());
+            preparedStatement.setString(index++, product.getRete());
+            preparedStatement.setString(index++, product.getBatteria());
+            preparedStatement.setString(index++, product.getDimPes());
+            preparedStatement.setString(index++, product.getSO());
+            preparedStatement.setString(index++, product.getAcqua());
 
             preparedStatement.executeUpdate();
             System.out.println("Product saved: " + product.getNome());
@@ -85,6 +99,94 @@ public class ProductDAODataSource implements IBeanDAO<ProductBean> {
         }
     }
 
+    
+    
+    public synchronized int doEdit(ProductBean product) throws SQLException {
+
+    	int output = 0;
+    		
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        String updateSQL = "UPDATE " + TABLE_NAME + " SET " +
+        		COLUMN_NOME + " = ?, " +
+        		COLUMN_DESCRIZIONE + " = ?, " +
+        		COLUMN_HOUSE + " = ?, " +
+        		COLUMN_PREZZO + " = ?, " +
+        		COLUMN_DISPLAY  + " = ?, " +
+        		COLUMN_CAMERA + " = ?, " +
+        		COLUMN_STORAGE + " = ?, " +
+        		COLUMN_AUTH + " = ?, " +
+        		COLUMN_CHIP + " = ?, " +
+        		COLUMN_SIM + " = ?, " +
+        		COLUMN_BLUE + " = ?, " +
+        		COLUMN_CONNECT + " = ?, " +
+        		COLUMN_RETE + " = ?, " +
+        		COLUMN_BATTERIA + " = ?, " +
+        		COLUMN_DIMPES + " = ?, " +
+                COLUMN_SO + " = ?, " +
+                COLUMN_ACQUA + " = ?, " +
+                " WHERE ID_PRODOTTO = ? "; 
+
+        try {
+            connection = ds.getConnection();
+            preparedStatement = connection.prepareStatement(updateSQL);
+            
+            preparedStatement.setString(1, product.getNome());
+            preparedStatement.setString(2, product.getDescrizione());
+            preparedStatement.setString(3, product.getCasa());
+            preparedStatement.setDouble(4, product.getPrezzo());
+            preparedStatement.setString(5, product.getDisplay());
+            preparedStatement.setString(6, product.getFotocamera());
+            preparedStatement.setString(7, product.getArchiviazione());
+            preparedStatement.setString(8, product.getAutenticazione());
+            preparedStatement.setString(9, product.getChip());
+            preparedStatement.setString(10, product.getSIM());
+            preparedStatement.setString(11, product.getBluetooth());
+            preparedStatement.setString(12, product.getConnettori());
+            preparedStatement.setString(13, product.getRete());
+            preparedStatement.setString(14, product.getBatteria());
+            preparedStatement.setString(15, product.getDimPes());
+            preparedStatement.setString(16, product.getSO());
+            preparedStatement.setString(17, product.getAcqua());
+            // Set the WHERE condition parameter
+      
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            
+            if (rowsAffected > 0) {
+                System.out.println("Product updated: " + product.getNome());
+            } else {
+                System.out.println("No product found with name: " + product.getNome());
+            }
+            
+            output = rowsAffected;
+
+        } 
+        catch (Exception e) {
+        	System.out.println(e.toString());
+		}
+        finally {
+            try {
+                if (preparedStatement != null)
+                    preparedStatement.close();
+            } finally {
+                if (connection != null)
+                    connection.close();
+            }
+        }
+        
+        return output;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     @Override
     public synchronized boolean doDelete(int code) throws SQLException {
         Connection connection = null;

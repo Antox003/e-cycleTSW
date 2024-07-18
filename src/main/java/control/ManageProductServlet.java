@@ -93,7 +93,7 @@ public class ManageProductServlet extends HttpServlet {
             System.out.println("Error:" + e.getMessage());
         }
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/home.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/home");
         dispatcher.forward(request, response);
     }
 

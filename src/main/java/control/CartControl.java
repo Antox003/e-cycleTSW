@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.CartBean;
 import model.CartModel;
 import model.ProductBean;
+import model.UserBean;
 
 /**
  * Servlet implementation class CartControl
@@ -43,6 +44,9 @@ public class CartControl extends HttpServlet {
                 case "svuotare":
                     svuotaCarrello(request, response);
                     break;
+                case "paga":
+                    effettuaPagamento(request, response);
+                    break;
                 default:
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Azione non valida");
                     break;
@@ -52,7 +56,38 @@ public class CartControl extends HttpServlet {
         }
     }
 
-    private void modificaQuantita(HttpServletRequest request, HttpServletResponse response, int modifica) throws ServletException, IOException {
+    private void effettuaPagamento(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		// TODO Auto-generated method stubCartBean carrello = (CartBean) request.getSession().getAttribute("carrello");
+        UserBean user = (UserBean) request.getSession().getAttribute("registeredUser");
+        CartModel cartModel = new CartModel();
+        Ordini orderModel = new Ordini();
+        CartBean carrello = (CartBean) request.getSession().getAttribute("carrello");
+
+
+        if (carrello != null && user != null) {
+            try {
+                // Crea l'ordine utilizzando il modello dei carrelli
+                cartModel.doOrder(carrello, user);
+
+                // Salva l'ordine nel database utilizzando il modello degli ordini
+                orderModel.saveOrder(carrello, user);
+
+                // Pulisce il carrello dopo aver completato l'ordine
+                carrello.clear();
+                request.getSession().setAttribute("carrello", carrello);
+
+                // Reindirizza alla pagina di conferma dell'ordine o ad un'altra pagina appropriata
+                response.sendRedirect(request.getContextPath() + "/check.jsp");
+            } catch (SQLException e) {
+                throw new ServletException("Errore durante il salvataggio dell'ordine nel database", e);
+            }
+        } else {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Impossibile completare l'ordine: carrello o utente non validi");
+        }
+    }
+		
+
+	private void modificaQuantita(HttpServletRequest request, HttpServletResponse response, int modifica) throws ServletException, IOException {
         try {
             String codiceStr = request.getParameter("codice");
             int codice = Integer.parseInt(codiceStr);
@@ -129,4 +164,5 @@ public class CartControl extends HttpServlet {
         doGet(request, response);
     }
 }
+
 

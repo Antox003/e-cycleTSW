@@ -1,16 +1,38 @@
 package model;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+import model.ProductBean;
 import control.DriverManagerConnectionPool;
 
 public class CartModel {
+	private static DataSource ds;
+
+    static {
+        try {
+            Context initCtx = new InitialContext();
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+
+            ds = (DataSource) envCtx.lookup("jdbc/ecycle");
+
+            System.out.println("DataSource lookup successful");
+
+        } catch (NamingException e) {
+            System.out.println("Error during DataSource lookup: " + e.getMessage());
+        }
+    }
     public synchronized CartBean updateCarrello(ProductBean bean, CartBean cart) {
         Collection<ProductBean> collection = cart.getCarrello();
         Collection<ProductBean> lista = new LinkedList<ProductBean>();
@@ -97,5 +119,44 @@ public class CartModel {
             }
         }
     }
-}
+
+	public CartBean doOrder(CartBean carrello, UserBean user) throws SQLException {
+		        Connection conn = null;
+		        PreparedStatement stmt = null;
+		        OrdiniBean ordini = new OrdiniBean();
+		        ProductBean bean = new ProductBean();
+		        try {
+					conn = ds.getConnection(); // Ottieni la connessione al database
+
+		            // Esempio di operazione: inserisci i dettagli dell'ordine nella tabella degli ordini
+		            String insertOrderQuery = "INSERT INTO ORDINI (Numero_Prodotti, Data_acquisto, ID_ACCOUNT, Nome_prodotto) VALUES (?, ?, ?, ?)";
+		            stmt = conn.prepareStatement(insertOrderQuery);
+		            stmt.setString(1, ordini.getNumeroprodotti());
+		            stmt.setDate(2, new java.sql.Date(System.currentTimeMillis())); 
+		            stmt.setInt(3, user.getCode());
+		            stmt.setString(4, bean.getNome());
+		            stmt.executeUpdate();
+
+
+		            // Ritorna il carrello aggiornato dopo l'ordine
+		            return carrello;
+
+		        } catch (SQLException e) {
+		            // Gestisci eventuali eccezioni SQL
+		            if (conn != null) {
+		            }
+		            throw e; // Rilancia l'eccezione per essere gestita dal chiamante
+		        } finally {
+		            // Chiudi le risorse PreparedStatement e Connection
+		            if (stmt != null) {
+		                stmt.close();
+		            }
+		            if (conn != null) {
+		               
+		                conn.close();
+		            }
+		        }
+		    }
+		
+	}
 
