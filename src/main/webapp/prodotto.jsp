@@ -35,7 +35,10 @@
 
                     <div class="container-button">
                         <button class="buy">
-                            <a href="check.jsp">Acquista</a>
+								<a href="PagaOra?action=paga&productId=<%= product.getCode() %>&quantity=1&productName=<%= product.getNome() %>">
+    Paga ora
+</a>
+
                         </button>
     					 <%if (session.getAttribute("registeredUser") == null) { %>
                        
@@ -189,38 +192,6 @@
                     <div class="specifiche">
                         <p class="paragrafo"><%= product.getAcqua() %></p>
                     </div>
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
                 
                 
                 
