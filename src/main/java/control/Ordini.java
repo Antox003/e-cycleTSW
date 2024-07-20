@@ -46,6 +46,7 @@ public class Ordini extends HttpServlet {
 
         request.setAttribute("ordini", ordiniList);
         request.getRequestDispatcher("/ordini.jsp").forward(request, response);
+        request.getRequestDispatcher("/admin.jsp").forward(request, response);
     }
 
     @Override

@@ -2,6 +2,7 @@ package model;
 
 import java.sql.Connection;
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,6 +16,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import model.ProductBean;
+import model.SpedizioneBean;
 import control.DriverManagerConnectionPool;
 
 public class CartModel {
@@ -56,7 +58,7 @@ public class CartModel {
     public synchronized CartBean acquista(CartBean cart, UserBean user) throws SQLException {
         Connection con = null;
         Collection<ProductBean> carrello = cart.getCarrello();
-        String sql = "INSERT INTO ORDINI (ID_ORDINE, Numero_prodotti, Data_aquisto, ID_ACCOUNT, ID_PRODOTTO, ID_INDIRIZZO) VALUES (?, ?, current_date(), ?, ?, ?)";
+        String sql = "INSERT INTO ORDINI (ID_ORDINE, Numero_prodotti, Data_aquisto, ID_ACCOUNT, Nome_prodotto, ID_INDIRIZZO, Numero_carta) VALUES (?, ?, current_date(), ?, ?, ?, ?)";
 
         try {
             con = DriverManagerConnectionPool.getConnection();
@@ -65,13 +67,17 @@ public class CartModel {
                 for (Iterator<ProductBean> i = cart.getCarrello().iterator(); i.hasNext();) {
                     ProductBean bean = (ProductBean) i.next();
                     Double prezzoTot = bean.getPrezzo() * bean.getQuantity();
-
+                    SpedizioneBean spedizione = new SpedizioneBean();
+                    PagamentoBean pagamento = new PagamentoBean();
+                    
                     PreparedStatement ps = con.prepareStatement(sql);
-                    ps.setInt(1, bean.getCode());
-                    ps.setString(2, user.getEmail());
-                    ps.setDouble(3, prezzoTot);
-                    ps.setInt(4, bean.getQuantity());
-
+                    ps.setInt(1, bean.getCode());  
+                    ps.setInt(2, bean.getQuantity());
+                    ps.setInt(3, bean.getCode()); 
+                    ps.setInt(4, bean.getCode()); 
+                    ps.setString(4, bean.getNome());
+                    ps.setString(5, spedizione.getIndirizzo()); 
+                    ps.setString(6, pagamento.getNumerocarta());
                     ps.executeUpdate();
                 }
                 con.commit();
@@ -119,44 +125,59 @@ public class CartModel {
             }
         }
     }
+    
+    
+    
+    
+    public synchronized CartBean doOrder(CartBean carrello, UserBean user) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
 
-	public CartBean doOrder(CartBean carrello, UserBean user) throws SQLException {
-		        Connection conn = null;
-		        PreparedStatement stmt = null;
-		        OrdiniBean ordini = new OrdiniBean();
-		        ProductBean bean = new ProductBean();
-		        try {
-					conn = ds.getConnection(); // Ottieni la connessione al database
+        try {
+            conn = ds.getConnection(); // Ottieni la connessione al database
+            conn.setAutoCommit(false); // Disabilita l'auto-commit per gestire la transazione manualmente
 
-		            // Esempio di operazione: inserisci i dettagli dell'ordine nella tabella degli ordini
-		            String insertOrderQuery = "INSERT INTO ORDINI (Numero_Prodotti, Data_acquisto, ID_ACCOUNT, Nome_prodotto) VALUES (?, ?, ?, ?)";
-		            stmt = conn.prepareStatement(insertOrderQuery);
-		            stmt.setString(1, ordini.getNumeroprodotti());
-		            stmt.setDate(2, new java.sql.Date(System.currentTimeMillis())); 
-		            stmt.setInt(3, user.getCode());
-		            stmt.setString(4, bean.getNome());
-		            stmt.executeUpdate();
+            Collection<ProductBean> carrelloProdotti = carrello.getCarrello();
+            if (carrelloProdotti == null || carrelloProdotti.isEmpty()) {
+                throw new SQLException("Il carrello è vuoto");
+            }
 
+            String insertOrderQuery = "INSERT INTO ORDINI (Numero_Prodotti, Data_acquisto, ID_ACCOUNT, Nome_prodotto) VALUES (?, ?, ?, ?)";
 
-		            // Ritorna il carrello aggiornato dopo l'ordine
-		            return carrello;
+            for (ProductBean prodotto : carrelloProdotti) {
+                stmt = conn.prepareStatement(insertOrderQuery);
+                stmt.setInt(1, prodotto.getQuantity()); // Numero di prodotti
+                stmt.setDate(2, new java.sql.Date(System.currentTimeMillis())); // Data di acquisto
+                stmt.setInt(3, user.getCode()); // ID dell'utente
+                stmt.setString(4, prodotto.getNome()); // Nome del prodotto
 
-		        } catch (SQLException e) {
-		            // Gestisci eventuali eccezioni SQL
-		            if (conn != null) {
-		            }
-		            throw e; // Rilancia l'eccezione per essere gestita dal chiamante
-		        } finally {
-		            // Chiudi le risorse PreparedStatement e Connection
-		            if (stmt != null) {
-		                stmt.close();
-		            }
-		            if (conn != null) {
-		               
-		                conn.close();
-		            }
-		        }
-		    }
-		
-	}
+                stmt.executeUpdate();
+            }
 
+            conn.commit(); // Commit della transazione
+            carrello.clear(); // Svuota il carrello dopo l'ordine
+
+            return carrello;
+
+        } catch (SQLException e) {
+            if (conn != null) {
+                conn.rollback(); // Rollback in caso di errore
+            }
+            throw new SQLException("Errore durante l'inserimento dell'ordine", e);
+        } finally {
+            // Chiudi le risorse PreparedStatement e Connection
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (conn != null) {
+                conn.setAutoCommit(true); // Riabilita l'auto-commit
+                conn.close();
+            }
+        }
+    }
+
+    
+    
+    
+
+}

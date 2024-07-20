@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="model.UserBean,java.sql.SQLException ,java.util.List,model.ProductBean,model.ProductDAODataSource"%>
+    pageEncoding="ISO-8859-1" import="model.UserBean,java.sql.SQLException,java.util.Enumeration ,java.util.List,model.ProductBean,model.ProductDAODataSource, model.OrdiniDAODataSource, model.OrdiniBean"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,13 +7,14 @@
     <link rel="icon" href="img/logo_circle.png" type="image/png">
     <meta charset="UTF-8">
     <title>E-Cycle | Admin</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
 </head>
 <body>
 
- <section class="header-container">
+<section class="header-container">
         <%@include file="fragment/header.jsp" %>
     </section>
-
 
     <div class="container-admin">
         <h3 class="titolo">Gestione Sito Web <img src="img/img-gestione.svg" class="img-h3"></h3>
@@ -44,8 +45,8 @@
             <div class="main">
                 <div id="dashboard" class="container-sezione">
                     <!-- Contenuto della sezione Dashboard -->
-                    <p class="p_titolo"><b class="titolo_p"><em>Benvenuto nomeadmin!</em></b><br>Qui puoi visualizzare una panoramica del sito.
-                        <br>Esplora la barra di <b>navigazione laterale</b> per più funzioni!
+                    <p class="p_titolo"><b class="titolo_p"><em>Benvenuto</em></b><br>Qui puoi visualizzare una panoramica del sito.
+                        <br>Esplora la barra di <b>navigazione laterale</b> per piï¿½ funzioni!
                     </p>
                     <p class="p"> 
                         <b class="b"><img src="img/img-freccia.svg" class="img-p">Funzioni rapide </b>
@@ -70,6 +71,8 @@
                                     <input class="form-input" type="text" placeholder="Inserisci il nome" maxlength="50" id="nome" name="nome" required> 
                                     <label class="form-label" for="descrizione">Descrizione (max 500 caratteri):</label> 
                                     <input class="form-input" type="text" placeholder="Inserisci la descrizione" maxlength="500" id="descrizione" name="descrizione" required> 
+                                    <label class="form-label" for="immagine">Immagine:</label>
+                                    <input class="form-input" type="file" id="immagine" name="immagine" accept="image/*" required>
                                     <label class="form-label" for="prezzo">Prezzo:</label> 
                                     <input class="form-input" type="number" placeholder="Inserisci il prezzo" id="prezzo" name="prezzo" min="0.01" max="100000" step="0.01" required>
                                     <hr><h4>Specifiche Prodotto (max 300 caratteri per campo)</h4><br>
@@ -206,6 +209,8 @@
                                     <input class="form-input" type="text" placeholder="Inserisci il nome" maxlength="50" id="nome" name="nome" required> 
                                     <label class="form-label" for="descrizione">Descrizione (max 500 caratteri):</label> 
                                     <input class="form-input" type="text" placeholder="Inserisci la descrizione" maxlength="500" id="descrizione" name="descrizione" required> 
+                                   	<label class="form-label" for="immagine">Immagine:</label>
+                                    <input class="form-input" type="file" id="immagine" name="immagine" accept="image/*" required>
                                     <label class="form-label" for="prezzo">Prezzo:</label> 
                                     <input class="form-input" type="number" placeholder="Inserisci il prezzo" id="prezzo" name="prezzo" min="0.01" max="10000" step="0.01" required>
                                     <hr><h4>Specifiche Prodotto (max 300 caratteri per campo)</h4><br>
@@ -279,7 +284,7 @@
                    </form>
             </td>
             <td>
-                <a href="ModificaProdotto?id=1&nome=Antonio">Modifica</a>
+                <a href="AdminProductList?action=edit&id=<%= product.getCode() %>">Modifica</a>
                 <img src="img/img-matita.svg" class="img-tab" onclick="togglePopup('popup6')">
             </td>
             <td>
@@ -289,9 +294,9 @@
             </td>
         </tr>
        <% 
-       System.out.println(product.getCode());
-            } // fine del loop for
-        } // fine del controllo sulla lista non null
+       
+            } 
+        }
         %>
     </tbody>
 </table>
@@ -299,57 +304,67 @@
                     <div id="popup6" class="sfondo-popup"> 
                         <div class="container-popup"> 
                             <h2 class="h2-popup">Modifica un articolo del Catalogo</h2><br> 
-                            <form class="container-form" action="ModificaProdotto"> 
-                                <div class="selezione">
-                                    <button class="button-chiudi-popup" type="reset" onclick="togglePopup('popup6')"><img src="img/img-freccia_indietro.svg" class="img-button">Annulla</button> 
-                                </div>
-                                <br>
-                                <% 
+                           
+                        
+                           
+                           
+	<form class="container-form" id="productForm" method="post" action="ModificaProdotto"> 
+        <div class="selezione">
+            <button class="button-chiudi-popup" type="reset" onclick="togglePopup('popup6')"><img src="img/img-freccia_indietro.svg" class="img-button">Annulla</button> 
+        </div>
+        <br>
+  <% 
                 ProductBean prodotto = (ProductBean) request.getAttribute("prodotto");
-                
+                if (prodotto == null) {
+                    out.println("<p>Errore: Prodotto non trovato.</p>");
+                } else {
             %>
-            
-            
-                                <label class="form-label" for="nome">Nome (max 50 caratteri):</label> 
-                                <input class="form-input" type="text" placeholder="Inserisci il nome" maxlength="50" id="nome" name="nome"> 
-                                <label class="form-label" for="descrizione">Descrizione (max 500 caratteri):</label> 
-                                <input class="form-input" type="text" placeholder="Inserisci la descrizione" maxlength="500" id="descrizione" name="descrizione"> 
-                                <label class="form-label" for="prezzo">Prezzo:</label> 
-                                <input class="form-input" type="number" placeholder="Inserisci il prezzo" id="prezzo" name="prezzo" min="0.01" max="10000" step="0.01">
-                                <hr><h4>Specifiche Prodotto (max 300 caratteri per campo)</h4><br>
-                                <label class="form-label" for="casa">Casa di produzione:</label> 
-                                <input class="form-input" type="text" placeholder="Inserisci casa di produzione" maxlength="300" id="casa" name="casa"> 
-                                <label class="form-label" for="display">Display:</label> 
-                                <input class="form-input" type="text" placeholder="Inserisci display" maxlength="300" id="display" name="display"> 
-                                <label class="form-label" for="fotocamera">Fotocamera:</label> 
-                                <input class="form-input" type="text" placeholder="Inserisci fotocamera" maxlength="300" id="fotocamera" name="fotocamera"> 
-                                <label class="form-label" for="archiviazione">Archiviazione:</label> 
-                                <input class="form-input" type="text" placeholder="Inserisci archiviazione" maxlength="300" id="archiviazione" name="archiviazione"> 
-                                <label class="form-label" for="chip">Chip:</label> 
-                                <input class="form-input" type="text" placeholder="Inserisci chip" id="chip" maxlength="300" name="chip"> 
-                                <label class="form-label" for="sim">SIM:</label> 
-                                <input class="form-input" type="text" placeholder="Inserisci sim" id="sim" maxlength="300" name="sim"> 
-                                <label class="form-label" for="bluetooth">Bluetooth:</label> 
-                                <input class="form-input" type="text" placeholder="Inserisci bluetooth" maxlength="300" id="bluetooth" name="bluetooth"> 
-                                <label class="form-label" for="connettori">Connettori:</label> 
-                                <input class="form-input" type="text" placeholder="Inserisci connettori" maxlength="300" id="connettori" name="connettori"> 
-                                <label class="form-label" for="rete">Rete:</label> 
-                                <input class="form-input" type="text" placeholder="Inserisci rete" id="rete" maxlength="300" name="rete"> 
-                                <label class="form-label" for="batteria">Batteria:</label> 
-                                <input class="form-input" type="text" placeholder="Inserisci batteria" id="batteria" maxlength="300" name="batteria"> 
-                                <label class="form-label" for="DimPes">Dimensione e Peso:</label> 
-                                <input class="form-input" type="text" placeholder="Inserisci dimensioni e peso" maxlength="300" id="DimPes" name="DimPes"> 
-                                <label class="form-label" for="so">Sistema Operativo:</label> 
-                                <input class="form-input" type="text" placeholder="Inserisci sistema operativo" maxlength="300" id="so" name="so"> 
-                                <label class="form-label" for="acqua">Resistenza all'acqua:</label> 
-                                <input class="form-input" type="text" placeholder="Inserisci resistenza all'acqua" maxlength="300" id="acqua" name="acqua"> 
-                                <div class="selezione">
-                                    <button class="button-chiudi-popup" type="reset" onclick="togglePopup('popup6')"><img src="img/img-freccia_indietro.svg" class="img-button">Annulla</button> 
-                                    <button class="button-submit" type="submit">Modifica</button> 
-                                </div>
-                               
-                            </form>  
-                        </div> 
+        <input type="text" id="ID_PRODOTTO" name="ID_PRODOTTO" value="<%=prodotto.getCode()%>">
+
+        <label class="form-label" for="nome">Nome (max 50 caratteri):</label> 
+        <input class="form-input" type="text" placeholder="Inserisci il nome" maxlength="50" id="nome" name="nome"> 
+        <label class="form-label" for="descrizione">Descrizione (max 500 caratteri):</label> 
+        <input class="form-input" type="text" placeholder="Inserisci la descrizione" maxlength="500" id="descrizione" name="descrizione"> 
+        <label class="form-label" for="prezzo">Prezzo:</label> 
+        <input class="form-input" type="text" placeholder="Inserisci il prezzo" id="prezzo" name="prezzo">
+        <hr><h4>Specifiche Prodotto (max 300 caratteri per campo)</h4><br>
+        <label class="form-label" for="casa">Casa di produzione:</label> 
+        <input class="form-input" type="text" placeholder="Inserisci casa di produzione" maxlength="300" id="casa" name="casa"> 
+        <label class="form-label" for="display">Display:</label> 
+        <input class="form-input" type="text" placeholder="Inserisci display" maxlength="300" id="display" name="display"> 
+        <label class="form-label" for="fotocamera">Fotocamera:</label> 
+        <input class="form-input" type="text" placeholder="Inserisci fotocamera" maxlength="300" id="fotocamera" name="fotocamera"> 
+        <label class="form-label" for="archiviazione">Archiviazione:</label> 
+        <input class="form-input" type="text" placeholder="Inserisci archiviazione" maxlength="300" id="archiviazione" name="archiviazione">
+         <label class="form-label" for="archiviazione">Autenticazione:</label> 
+        <input class="form-input" type="text" placeholder="Inserisci autenticazione" maxlength="300" id="autenticazione" name="autenticazione">  
+        <label class="form-label" for="chip">Chip:</label> 
+        <input class="form-input" type="text" placeholder="Inserisci chip" id="chip" maxlength="300" name="chip"> 
+        <label class="form-label" for="sim">SIM:</label> 
+        <input class="form-input" type="text" placeholder="Inserisci sim" id="sim" maxlength="300" name="sim"> 
+        <label class="form-label" for="bluetooth">Bluetooth:</label> 
+        <input class="form-input" type="text" placeholder="Inserisci bluetooth" maxlength="300" id="bluetooth" name="bluetooth"> 
+        <label class="form-label" for="connettori">Connettori:</label> 
+        <input class="form-input" type="text" placeholder="Inserisci connettori" maxlength="300" id="connettori" name="connettori"> 
+        <label class="form-label" for="rete">Rete:</label> 
+        <input class="form-input" type="text" placeholder="Inserisci rete" id="rete" maxlength="300" name="rete"> 
+        <label class="form-label" for="batteria">Batteria:</label> 
+        <input class="form-input" type="text" placeholder="Inserisci batteria" id="batteria" maxlength="300" name="batteria"> 
+        <label class="form-label" for="DimPes">Dimensione e Peso:</label> 
+        <input class="form-input" type="text" placeholder="Inserisci dimensioni e peso" maxlength="300" id="DimPes" name="DimPes"> 
+        <label class="form-label" for="so">Sistema Operativo:</label> 
+        <input class="form-input" type="text" placeholder="Inserisci sistema operativo" maxlength="300" id="so" name="so"> 
+        <label class="form-label" for="acqua">Resistenza all'acqua:</label> 
+        <input class="form-input" type="text" placeholder="Inserisci resistenza all'acqua" maxlength="300" id="acqua" name="acqua"> 
+        <div class="selezione">
+            <button class="button-chiudi-popup" type="reset" onclick="togglePopup('popup6')"><img src="img/img-freccia_indietro.svg" class="img-button">Annulla</button> 
+            <button class="button-submit" type="submit">Modifica</button> 
+        </div>              
+    </form>
+
+<%} %>
+
+						</div> 
                     </div>
                 </div>
                 
@@ -370,13 +385,27 @@
                     </div>
                     <div id="resultOrdini" class="risultati-ricerca"></div>
                     <table id="tableOrdini" class="tabella-utente">
+               
                         <thead>
-                            <tr><th>ID Ordine</th><th>ID Prodotto</th><th>Pagato</th><th>Ordinato da</th><th>ID Indirizzo</th><th>Data Ordine</th><th>Elimina</th></tr>
+                            <tr><th>ID Ordine</th><th>Nome prodotto</th><th>Pagato</th><th>Ordinato da</th><th>ID Indirizzo</th><th>Data Ordine</th><th>Elimina</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>ID1</td><td>1</td><td>10 &#8364</td><td>email1@gmail.com</td><td>1</td><td>2022-01-01</td><td><img src="img/img-elimina.svg" class="img-tab"></td></tr>
-                            <tr><td>ID2</td><td>2</td><td>50 &#8364</td><td>email2@gmail.com</td><td>2</td><td>2023-02-15</td><td><img src="img/img-elimina.svg" class="img-tab"></td></tr>
-                            <tr><td>ID3</td><td>3</td><td>10.99 &#8364</td><td>email3@gmail.com</td><td>3</td><td>2024-03-10</td><td><img src="img/img-elimina.svg" class="img-tab"></td></tr>
+                             <%
+                OrdiniDAODataSource ordiniDAO = new OrdiniDAODataSource();
+                List<OrdiniBean> ordiniList = null;
+                try {
+                    ordiniList = ordiniDAO.doRetrieveAll("DESC"); // "DESC" o "ASC" a seconda dell'ordine desiderato
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    // Gestisci l'errore, ad esempio, mostrando un messaggio all'utente
+                }
+            %>
+              <% if (ordiniList != null && !ordiniList.isEmpty()) { %>
+            <% for (OrdiniBean ordine : ordiniList) { %>
+                            <tr><td><%=ordine.getCode()%></td><td><%=ordine.getProdotto()%></td><td>10 &#8364</td><td><%=ordine.getIndirizzo()%></td><td>1</td><td><%=ordine.getDataacquisto()%></td><td><img src="img/img-elimina.svg" class="img-tab"></td></tr>
+                            <%}
+              }
+            %>
                         </tbody>
                     </table>
                 </div>

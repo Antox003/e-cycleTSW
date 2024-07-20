@@ -102,36 +102,36 @@ public class ProductDAODataSource implements IBeanDAO<ProductBean> {
     
     
     public synchronized int doEdit(ProductBean product) throws SQLException {
-
-    	int output = 0;
-    		
+        int output = 0;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
+        // SQL di aggiornamento con la clausola WHERE corretta
         String updateSQL = "UPDATE " + TABLE_NAME + " SET " +
-        		COLUMN_NOME + " = ?, " +
-        		COLUMN_DESCRIZIONE + " = ?, " +
-        		COLUMN_HOUSE + " = ?, " +
-        		COLUMN_PREZZO + " = ?, " +
-        		COLUMN_DISPLAY  + " = ?, " +
-        		COLUMN_CAMERA + " = ?, " +
-        		COLUMN_STORAGE + " = ?, " +
-        		COLUMN_AUTH + " = ?, " +
-        		COLUMN_CHIP + " = ?, " +
-        		COLUMN_SIM + " = ?, " +
-        		COLUMN_BLUE + " = ?, " +
-        		COLUMN_CONNECT + " = ?, " +
-        		COLUMN_RETE + " = ?, " +
-        		COLUMN_BATTERIA + " = ?, " +
-        		COLUMN_DIMPES + " = ?, " +
+                COLUMN_NOME + " = ?, " +
+                COLUMN_DESCRIZIONE + " = ?, " +
+                COLUMN_HOUSE + " = ?, " +
+                COLUMN_PREZZO + " = ?, " +
+                COLUMN_DISPLAY + " = ?, " +
+                COLUMN_CAMERA + " = ?, " +
+                COLUMN_STORAGE + " = ?, " +
+                COLUMN_AUTH + " = ?, " +
+                COLUMN_CHIP + " = ?, " +
+                COLUMN_SIM + " = ?, " +
+                COLUMN_BLUE + " = ?, " +
+                COLUMN_CONNECT + " = ?, " +
+                COLUMN_RETE + " = ?, " +
+                COLUMN_BATTERIA + " = ?, " +
+                COLUMN_DIMPES + " = ?, " +
                 COLUMN_SO + " = ?, " +
-                COLUMN_ACQUA + " = ?, " +
-                " WHERE ID_PRODOTTO = ? "; 
+                COLUMN_ACQUA + " = ? " +
+                "WHERE ID_PRODOTTO = ?"; 
 
         try {
             connection = ds.getConnection();
             preparedStatement = connection.prepareStatement(updateSQL);
-            
+
+            // Imposta i valori per tutti i parametri
             preparedStatement.setString(1, product.getNome());
             preparedStatement.setString(2, product.getDescrizione());
             preparedStatement.setString(3, product.getCasa());
@@ -149,24 +149,26 @@ public class ProductDAODataSource implements IBeanDAO<ProductBean> {
             preparedStatement.setString(15, product.getDimPes());
             preparedStatement.setString(16, product.getSO());
             preparedStatement.setString(17, product.getAcqua());
-            // Set the WHERE condition parameter
-      
+            // Imposta il parametro per la clausola WHERE
+            preparedStatement.setInt(18, product.getCode());
 
+            // Esegui l'aggiornamento
             int rowsAffected = preparedStatement.executeUpdate();
-            
+
+            // Debugging
             if (rowsAffected > 0) {
                 System.out.println("Product updated: " + product.getNome());
             } else {
-                System.out.println("No product found with name: " + product.getNome());
+                System.out.println("No product found with ID: " + product.getCode());
             }
-            
+
             output = rowsAffected;
 
-        } 
-        catch (Exception e) {
-        	System.out.println(e.toString());
-		}
-        finally {
+        } catch (Exception e) {
+            e.printStackTrace(); // Stampa l'eccezione per debug
+            throw e; // Rilancia l'eccezione per la gestione in alto livello
+        } finally {
+            // Chiudi le risorse nel blocco finally
             try {
                 if (preparedStatement != null)
                     preparedStatement.close();
@@ -175,9 +177,10 @@ public class ProductDAODataSource implements IBeanDAO<ProductBean> {
                     connection.close();
             }
         }
-        
+
         return output;
     }
+
     
     
     
@@ -278,7 +281,7 @@ public class ProductDAODataSource implements IBeanDAO<ProductBean> {
 
 
     @Override
-    public synchronized ProductBean doRetrieveByKey(int code) throws SQLException {
+    public synchronized ProductBean doRetrieveByKey(int idProdotto) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ProductBean bean = new ProductBean();
@@ -288,7 +291,7 @@ public class ProductDAODataSource implements IBeanDAO<ProductBean> {
             System.out.println("Database connection established for doRetrieveByKey");
 
             preparedStatement = connection.prepareStatement(selectSQL);
-            preparedStatement.setInt(1, code);
+            preparedStatement.setInt(1, idProdotto);
             System.out.println("Executing query: " + selectSQL);
 
             ResultSet rs = preparedStatement.executeQuery();
@@ -330,4 +333,5 @@ public class ProductDAODataSource implements IBeanDAO<ProductBean> {
         }
         return bean;
     }
+
 }
